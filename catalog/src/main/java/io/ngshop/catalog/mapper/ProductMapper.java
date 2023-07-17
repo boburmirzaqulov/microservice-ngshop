@@ -15,7 +15,8 @@ public class ProductMapper {
                 product.getDescription(),
                 product.getPrice(),
                 product.getSummary(),
-                product.getImageFile()
+                product.getImageFile(),
+                product.getBrandId()
         );
     }
     public Product toEntity(ProductDto productDto){
@@ -25,7 +26,8 @@ public class ProductMapper {
                 productDto.getDescription(),
                 productDto.getPrice(),
                 productDto.getSummary(),
-                productDto.getImageFile()
+                productDto.getImageFile(),
+                productDto.getBrandId()
         );
     }
 }
