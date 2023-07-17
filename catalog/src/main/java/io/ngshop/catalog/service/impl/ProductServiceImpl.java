@@ -1,4 +1,4 @@
-package io.ngshop.catalog.service.impl;
+package io.ngshop.catalog.service.Impl;
 
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.mapper.ProductMapper;
@@ -10,22 +10,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+
+    @Override
+    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDto) {
+        Product product = productMapper.toEntity(productDto);
+        Product save = productRepository.save(product);
+        return ResponseEntity.ok(productMapper.toDto(save));
+    }
+
     @Override
     public ResponseEntity<ProductDTO> getProductById(Long id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDTO) {
-        Product product = productMapper.toEntity(productDTO);
-
-        ProductDTO productDTO1 = productMapper.toDto(productRepository.save(product));
-        return ResponseEntity.ok(productDTO1);
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<Product> all = productRepository.findAll();
+        List<ProductDTO> list = all.stream().map(productMapper::toDto).collect(Collectors.toList());
+        return ResponseEntity.ok(list);
     }
 
     @Override
@@ -35,11 +44,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseEntity<Void> deleteProduct(Long id) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return null;
     }
 }

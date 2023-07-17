@@ -13,42 +13,36 @@ import java.util.List;
 @RequestMapping("/catalog")
 @RequiredArgsConstructor
 public class CatalogController {
+    @Autowired
+    private ProductService productService;
 
-    @GetMapping("//")
-    public String getAd(){
-        return "alfkdjlkfjafdas;flkjsdf";
+
+
+
+    @GetMapping
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        return productService.getAllProducts();
     }
 
-        @Autowired
-        private ProductService productService;
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        return productService.getProductById(id);
+    }
 
+    @PostMapping
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+        return productService.createProduct(productDTO);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {
+        return productService.updateProduct(productDTO);
+    }
 
-        @GetMapping
-        public ResponseEntity<List<ProductDTO>> getAllProducts() {
-            return productService.getAllProducts();
-        }
-
-        @GetMapping("/{id}")
-        public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
-           return productService.getProductById(id);
-        }
-
-        @PostMapping
-        public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
-
-            return productService.createProduct(productDTO);
-        }
-
-        @PutMapping("/{id}")
-        public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {
-           return productService.updateProduct(productDTO);
-        }
-
-        @DeleteMapping("/{id}")
-        public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-           return productService.deleteProduct(id);
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        return productService.deleteProduct(id);
+    }
 
 
 }
