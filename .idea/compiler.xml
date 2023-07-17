@@ -4,5 +4,10 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ordering" target="17" />
+      <module name="ordering.main" target="17" />
+      <module name="ordering.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
