@@ -3,7 +3,6 @@ package io.ngshop.catalog.controller;
 import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/catalog")
 public class ProductController {
-    private final MongoTemplate mongoTemplate;
     private final ProductService productService;
 
     @PostMapping
