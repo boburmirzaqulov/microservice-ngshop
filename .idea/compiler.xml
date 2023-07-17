@@ -11,5 +11,10 @@
         <module name="basket.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ordering" target="17" />
+      <module name="ordering.main" target="17" />
+      <module name="ordering.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
