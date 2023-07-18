@@ -16,7 +16,7 @@ public class DiscountProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Discount discountId;
+    private DiscountEntity discountId;
     private String productId;
 
 }

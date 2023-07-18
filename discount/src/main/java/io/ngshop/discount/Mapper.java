@@ -1,7 +1,7 @@
 package io.ngshop.discount;
 
 public class Mapper {
-    public static DiscountDto toDto(Discount discount){
+    public static DiscountDto toDto(DiscountEntity discount){
         return new DiscountDto(
                 discount.getId(),
                 discount.getProductName(),
@@ -9,9 +9,9 @@ public class Mapper {
                 discount.getDiscountProductId().getProductId()
                         );
     }
-    public  static  Discount tiEntity(DiscountCreateDto discountCreateDto){
+    public  static DiscountEntity tiEntity(DiscountCreateDto discountCreateDto){
         if(discountCreateDto==null) return null;
-        return new Discount(
+        return new DiscountEntity(
                 discountCreateDto.getProductName(),
                 discountCreateDto.getDescription(),
                 discountCreateDto.getPercent()

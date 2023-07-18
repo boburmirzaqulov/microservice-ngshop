@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @org.springframework.stereotype.Controller
 @RequestMapping("/discount")
 @RequiredArgsConstructor
-public class Controller {
+public class DiscountController {
     private final Service service;
     @GetMapping("{productId}")
     public ResponseEntity<DiscountDto> getByProductId(@PathVariable Long productId){

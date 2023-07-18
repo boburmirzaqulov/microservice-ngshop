@@ -19,14 +19,14 @@ public class ServiceImpl implements Service{
     public ResponseEntity<DiscountDto> getDiscount(String slug) {
         String[] split = slug.split("-");
         Long id = Long.parseLong(split[split.length-1]);
-        Optional<Discount> byId = Optional.ofNullable(repository.findById(id).orElseThrow(() -> new NoFoundRecurseException("Not found Recurse")));
+        Optional<DiscountEntity> byId = Optional.ofNullable(repository.findById(id).orElseThrow(() -> new NoFoundRecurseException("Not found Recurse")));
         return ResponseEntity.ok((DiscountDto) byId.stream().map(Mapper::toDto).collect(Collectors.toList()));
     }
 
     @Override
     public ResponseEntity<String> createDiscount(DiscountCreateDto discountCreateDto) {
-        Discount discount = Mapper.tiEntity(discountCreateDto);
-        Discount save = repository.save(discount);
+        DiscountEntity discount = Mapper.tiEntity(discountCreateDto);
+        DiscountEntity save = repository.save(discount);
         return ResponseEntity.ok("saved");
     }
 

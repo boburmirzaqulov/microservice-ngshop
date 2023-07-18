@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @jakarta.persistence.Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Discount {
+public class DiscountEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +22,7 @@ public class Discount {
     private DiscountProduct discountProductId;
     private Double percent;
 
-    public Discount(String productName, String description, Double percent) {
+    public DiscountEntity(String productName, String description, Double percent) {
         this.description=description;
         this.productName=productName;
         this.percent=percent;
