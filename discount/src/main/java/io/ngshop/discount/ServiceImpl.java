@@ -45,7 +45,7 @@ public class ServiceImpl implements Service{
         Long id = Long.parseLong(split[split.length-1]);
         repository.findById(id).orElseThrow(()->new NoFoundRecurseException("Not found recurse"));
         discountDto.setId(id);
-        discountDto.
+//        discountDto.
         return null;
     }
 

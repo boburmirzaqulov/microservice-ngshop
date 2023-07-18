@@ -10,20 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/catalog")
+@RequestMapping("/Catalog")
 @RequiredArgsConstructor
 public class CatalogController {
-
-    @GetMapping("//")
-    public String getAd(){
-        return "alfkdjlkfjafdas;flkjsdf";
-    }
-
         @Autowired
         private ProductService productService;
 
-
-
+        @GetMapping("//")
+        public String getAd(){
+        return "alfkdjlkfjafdas;flkjsdf";
+    }
         @GetMapping
         public ResponseEntity<List<ProductDTO>> getAllProducts() {
             return productService.getAllProducts();
