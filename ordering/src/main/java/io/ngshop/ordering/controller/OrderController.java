@@ -13,22 +13,22 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
-    @GetMapping("/v1/Order/{userName}")
-    public ResponseEntity<OrderDTO> getOrderByUserName(@PathVariable String userName){
-        return orderService.getOrderByUserName(userName);
+    @GetMapping("/Order/{username}")
+    public ResponseEntity<OrderDTO> getOrderByUsername(@PathVariable String username){
+        return orderService.getOrderByUsername(username);
     }
 
-    @PostMapping("/v1/Order")
+    @PostMapping("/Order")
     public ResponseEntity<OrderDTO> addOrder(@RequestBody OrderDTO orderDTO){
         return orderService.addOrder(orderDTO);
     }
 
-    @PostMapping("/v1/Order")
+    @PostMapping("/Order")
     public ResponseEntity<OrderDTO> updateOrder(@RequestBody OrderDTO orderDTO){
         return orderService.updateOrder(orderDTO);
     }
 
-    @DeleteMapping("/v1/Order/{id}")
+    @DeleteMapping("/Order/{id}")
     public void deleteOrder(@PathVariable Long id){
         orderService.deleteOrder(id);
     }

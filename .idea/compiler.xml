@@ -11,5 +11,9 @@
         <module name="catalog.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cloud-config-server.main" target="17" />
+      <module name="cloud-config-server.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
