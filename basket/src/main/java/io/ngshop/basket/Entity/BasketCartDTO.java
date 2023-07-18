@@ -15,4 +15,6 @@ import java.util.List;
 public class BasketCartDTO {
     private String UserName;
     private List<BasketDTO> Items;
+
+    private Double totalPrice;
 }
