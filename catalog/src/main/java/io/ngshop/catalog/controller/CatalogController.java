@@ -14,34 +14,11 @@ import java.util.List;
 @RequestMapping("/Catalog")
 @RequiredArgsConstructor
 public class CatalogController {
-        @Autowired
-        private ProductService productService;
-
-        @GetMapping
-        public ResponseEntity<List<ProductDTO>> getAllProducts() {
-            return productService.getAllProducts();
-        }
-
-        @GetMapping("/GetProductById/{id}")
-        public ResponseEntity<ProductDTO> getProductById(@PathVariable String id) {
-           return productService.getProductById(new ObjectId(id));
-        }
-
-        @PostMapping
-        public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
-
-            return productService.createProduct(productDTO);
-        }
-
-        @PutMapping("/{id}")
-        public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {
-           return productService.updateProduct(productDTO);
-        }
-
-        @DeleteMapping("/{id}")
-        public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-           return productService.deleteProduct(id);
-        }
+    private final ProductService productService;
+    @GetMapping("/GetProductById/{id}")
+        public ResponseEntity<ProductDTO> getProductById(@PathVariable String id){
+            return productService.getProductById(new ObjectId(id));
+    }
 
 
 }
