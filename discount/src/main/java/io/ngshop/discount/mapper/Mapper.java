@@ -1,4 +1,7 @@
-package io.ngshop.discount;
+package io.ngshop.discount.mapper;
+
+import io.ngshop.discount.dto.DiscountCreateDto;
+import io.ngshop.discount.entitiy.DiscountEntity;
 
 public class Mapper {
     public static DiscountDto toDto(DiscountEntity discount){

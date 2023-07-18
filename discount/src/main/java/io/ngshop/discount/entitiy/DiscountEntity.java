@@ -1,4 +1,4 @@
-package io.ngshop.discount;
+package io.ngshop.discount.entitiy;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +19,7 @@ public class DiscountEntity  {
     private String productName;
     private String description;
     @ManyToOne
-    private DiscountProduct discountProductId;
+    private DiscountProductEntity discountProductId;
     private Double percent;
 
     public DiscountEntity(String productName, String description, Double percent) {
