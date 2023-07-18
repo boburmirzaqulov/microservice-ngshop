@@ -20,7 +20,7 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public ResponseEntity<DiscountDto> getDiscountById(Long id) {
         Optional<Discount> discount = discountRepository.findById(id);
-        return null;
+        return ResponseEntity.ok(discountMapper.toDto(discount.get()));
     }
 
 
@@ -31,16 +31,25 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public ResponseEntity<DiscountDto> saveDiscount(DiscountDto discountDto) {
-        return null;
+        Discount discount = discountRepository.save(discountMapper.toEntity(discountDto));
+
+        return ResponseEntity.ok(discountMapper.toDto(discount));
     }
 
     @Override
     public ResponseEntity<DiscountDto> updateDiscount(DiscountDto discountDto) {
-        return null;
+        Optional<Discount> optionalDiscount = discountRepository.findById(discountDto.id());
+        return ResponseEntity.ok(discountMapper
+                .toDto(discountRepository
+                        .save(discountMapper
+                                .toEntity(discountDto))));
     }
 
     @Override
-    public void deleteDiscount(Long id) {
+    public ResponseEntity<DiscountDto> deleteDiscount(Long id) {
+        Optional<Discount> discountOptional = discountRepository.findById(id);
+        discountRepository.delete(discountOptional.get());
+        return ResponseEntity.ok(discountMapper.toDto(discountOptional.get()));
 
     }
 }
