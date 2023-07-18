@@ -1,6 +1,6 @@
 package io.ngshop.discount.dto;
 
-import io.ngshop.discount.entitiy.Discount;
+import io.ngshop.discount.model.Discount;
 
 public record DiscountProductDto (
         Long id,

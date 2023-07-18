@@ -1,7 +1,7 @@
 package io.ngshop.discount.mapper;
 
 import io.ngshop.discount.dto.DiscountProductDto;
-import io.ngshop.discount.entitiy.DiscountProduct;
+import io.ngshop.discount.model.DiscountProduct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
