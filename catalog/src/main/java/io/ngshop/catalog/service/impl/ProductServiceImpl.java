@@ -6,6 +6,7 @@ import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
 import io.ngshop.catalog.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     @Override
-    public ResponseEntity<ProductDTO> getProductById(Long id) {
+    public ResponseEntity<ProductDTO> getProductById(ObjectId id) {
         return null;
     }
 

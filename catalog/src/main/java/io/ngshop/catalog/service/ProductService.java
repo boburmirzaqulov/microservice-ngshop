@@ -1,6 +1,7 @@
 package io.ngshop.catalog.service;
 
 import io.ngshop.catalog.dto.ProductDTO;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public interface ProductService {
 
 
-    ResponseEntity<ProductDTO> getProductById(Long id);
+    ResponseEntity<ProductDTO> getProductById(ObjectId id);
 
     ResponseEntity<ProductDTO> createProduct(ProductDTO productDTO);
 
