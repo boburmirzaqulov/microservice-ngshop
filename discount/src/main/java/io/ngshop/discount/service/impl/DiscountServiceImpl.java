@@ -1,7 +1,7 @@
 package io.ngshop.discount.service.impl;
 
 import io.ngshop.discount.dto.DiscountDto;
-import io.ngshop.discount.entitiy.Discount;
+import io.ngshop.discount.model.Discount;
 import io.ngshop.discount.mapper.DiscountMapper;
 import io.ngshop.discount.repository.DiscountRepository;
 import io.ngshop.discount.service.DiscountService;

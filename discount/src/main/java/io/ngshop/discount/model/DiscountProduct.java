@@ -1,4 +1,4 @@
-package io.ngshop.discount.entitiy;
+package io.ngshop.discount.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
