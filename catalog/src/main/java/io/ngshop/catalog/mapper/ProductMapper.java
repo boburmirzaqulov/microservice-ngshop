@@ -1,25 +1,23 @@
 package io.ngshop.catalog.mapper;
 
-
-import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.model.Product;
 import org.springframework.stereotype.Service;
-
-
 @Service
 public class ProductMapper {
-    public ProductDTO toDto(Product product){
-        return product == null ? null : new ProductDTO(
+    public ProductDto toDto(Product product){
+        return product == null ? null : new ProductDto(
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
                 product.getSummary(),
                 product.getImageFile(),
-                product.getBrandId()
+                product.getBrandId(),
+                product.getTypeId()
         );
     }
-    public Product toEntity(ProductDTO productDto){
+    public Product toEntity(ProductDto productDto){
         return productDto == null ? null : new Product(
                 productDto.getId(),
                 productDto.getName(),
@@ -27,7 +25,8 @@ public class ProductMapper {
                 productDto.getPrice(),
                 productDto.getSummary(),
                 productDto.getImageFile(),
-                productDto.getBrandId()
+                productDto.getBrandId(),
+                productDto.getTypeId()
         );
     }
 }
