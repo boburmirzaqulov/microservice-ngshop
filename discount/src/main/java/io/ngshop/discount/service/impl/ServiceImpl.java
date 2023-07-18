@@ -1,4 +1,4 @@
-package io.ngshop.discount.service;
+package io.ngshop.discount.service.impl;
 
 import io.ngshop.discount.dto.DiscountCreateDto;
 import io.ngshop.discount.dto.DiscountDto;
