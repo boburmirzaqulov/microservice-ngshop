@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class ProductMapper {
     public ProductDTO toDto(Product product){
         return product == null ? null : new ProductDTO(
-                product.getId().toString(),
+                product.getId() != null ? product.getId().toString() : null,
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),

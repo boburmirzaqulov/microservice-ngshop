@@ -13,7 +13,7 @@ public interface ProductService {
 
     ResponseEntity<ProductDTO> create(ProductDTO productDTO);
 
-    ResponseEntity<ProductDTO> update(ProductDTO productDTO);
+    ResponseEntity<ProductDTO> update(ProductDTO productDTO,String productId);
 
     ResponseEntity<ProductDTO> delete(String id);
     ResponseEntity<List<ProductDTO>> getByName(String productName);

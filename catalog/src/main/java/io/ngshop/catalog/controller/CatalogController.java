@@ -68,9 +68,9 @@ public class CatalogController {
         return productService.create(productDTO);
     }
 
-    @PutMapping("/UpdateProduct")
-    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO){
-        return productService.update(productDTO);
+    @PutMapping("/UpdateProduct/{productId}")
+    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO, @PathVariable String productId){
+        return productService.update(productDTO,productId);
     }
 
     @DeleteMapping("/{id}/DeleteProduct")
