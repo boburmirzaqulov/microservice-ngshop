@@ -3,6 +3,7 @@ package io.ngshop.catalog.mapper;
 
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.model.Product;
+import io.ngshop.catalog.service.impl.CommonService;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,14 @@ public class ProductMapper {
         );
     }
     public Product toEntity(ProductDTO productDto){
-        return productDto == null ? null : new Product(
-                new ObjectId(productDto.getId()),
+        if (productDto == null) return null;
+
+        ObjectId objectId = null;
+        if(productDto.getId() != null){
+            objectId = CommonService.checkObjectId(productDto.getId());
+        }
+        return new Product(
+                objectId,
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
