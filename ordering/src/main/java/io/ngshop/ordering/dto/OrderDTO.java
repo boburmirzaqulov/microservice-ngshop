@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO {
+    private Long id;
     private String userName;
     private Double totalPrice;
     private String firstName;
