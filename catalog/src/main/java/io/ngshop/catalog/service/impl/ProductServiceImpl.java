@@ -23,7 +23,6 @@ public class ProductServiceImpl implements ProductService {
         Product save = productRepository.save(product);
         return ResponseEntity.ok(productMapper.toDto(save));
     }
-
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<Product> all = productRepository.findAll();
         List<ProductDto> list = all.stream().map(productMapper::toDto).toList();
