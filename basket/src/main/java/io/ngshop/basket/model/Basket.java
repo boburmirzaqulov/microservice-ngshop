@@ -13,9 +13,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @Document
 public class Basket {
-    private Long quantity;
+    private String username;
+    private String ProductId;
+    private Integer quantity;
     private String imageFile;
     private Double price;
-    private String productId;
     private String productName;
+
 }
