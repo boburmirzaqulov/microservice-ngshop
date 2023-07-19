@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    ResponseEntity<ProductDTO> getProductById(ObjectId id);
+    ResponseEntity<ProductDTO> getProductById(String id);
 
     ResponseEntity<ProductDTO> create(ProductDTO productDTO);
 

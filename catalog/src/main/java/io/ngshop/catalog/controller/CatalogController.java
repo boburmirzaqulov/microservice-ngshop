@@ -18,7 +18,7 @@ public class CatalogController {
     private final ProductService productService;
     @GetMapping("/GetProductById/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable String id){
-        return productService.getProductById(new ObjectId(id));
+        return productService.getProductById(id);
     }
 
 
@@ -29,7 +29,6 @@ public class CatalogController {
 
     @GetMapping("/GetProductsByBrandName/{brand}")
     public ResponseEntity<List<ProductDTO>> getProductByBrandName(@PathVariable String brand){
-        System.out.println(brand);
         return productService.getProductByBrandName(brand);
     }
 

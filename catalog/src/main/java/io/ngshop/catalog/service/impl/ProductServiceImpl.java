@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +21,10 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public ResponseEntity<ProductDTO> getProductById(ObjectId id) {
-        return null;
+    public ResponseEntity<ProductDTO> getProductById(String id) {
+        if (id.length() != 24) throw new NotFoundException("Product not found");
+        Product product = productRepository.findById(new ObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
+        return ResponseEntity.ok(productMapper.toDto(product));
     }
 
     @Override
