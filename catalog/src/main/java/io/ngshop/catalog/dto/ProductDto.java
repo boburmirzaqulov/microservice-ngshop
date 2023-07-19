@@ -1,20 +1,22 @@
-package io.ngshop.basket.model;
+package io.ngshop.catalog.dto;
 
-import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
-    private ObjectId id;
+@Builder
+public class ProductDto {
+    private String id;
     private String name;
     private String description;
     private Double price;
     private String summary;
     private String imageFile;
-    private ObjectId brandId;
+    private String brandId;
+    private String typeId;
+
 }

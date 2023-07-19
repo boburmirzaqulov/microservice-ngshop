@@ -1,4 +1,4 @@
-package io.ngshop.catalog.dto;
+package io.ngshop.basket.dto.serverDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import org.bson.types.ObjectId;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductDTO {
+public class ProductDtoCatalog {
     private ObjectId id;
     private String name;
     private String description;
@@ -18,5 +18,4 @@ public class ProductDTO {
     private String summary;
     private String imageFile;
     private ObjectId brandId;
-
 }

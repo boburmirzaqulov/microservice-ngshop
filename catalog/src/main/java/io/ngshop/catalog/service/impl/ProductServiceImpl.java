@@ -1,6 +1,6 @@
 package io.ngshop.catalog.service.impl;
 
-import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,31 +20,45 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDto) {
+    public ResponseEntity<ProductDto> create(ProductDto productDto) {
         Product product = productMapper.toEntity(productDto);
         Product save = productRepository.save(product);
         return ResponseEntity.ok(productMapper.toDto(save));
     }
 
-    @Override
-    public ResponseEntity<ProductDTO> getProductById(ObjectId id) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+    public ResponseEntity<List<ProductDto>> getProducts() {
         List<Product> all = productRepository.findAll();
-        List<ProductDTO> list = all.stream().map(productMapper::toDto).collect(Collectors.toList());
+        List<ProductDto> list = all.stream().map(productMapper::toDto).toList();
         return ResponseEntity.ok(list);
     }
 
     @Override
-    public ResponseEntity<ProductDTO> updateProduct(ProductDTO productDTO) {
+    public ResponseEntity<ProductDto> getProductById(String id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> deleteProduct(Long id) {
+    public ResponseEntity<ProductDto> update(ProductDto productDTO, String productId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<ProductDto> delete(String id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDto>> getByName(String productName) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDto>> getAllProducts(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDto>> getProductByBrandName(String brand) {
         return null;
     }
 }
