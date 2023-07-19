@@ -10,7 +10,7 @@ import org.bson.types.ObjectId;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductDTO {
+public class ProductDto {
     private ObjectId id;
     private String name;
     private String description;
