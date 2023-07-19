@@ -22,8 +22,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseEntity<ProductDTO> getProductById(String id) {
-        if (id.length() != 24) throw new NotFoundException("Product not found");
-        Product product = productRepository.findById(new ObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
+        ObjectId objectId = CommonService.checkObjectId(id);
+        Product product = productRepository.findById(objectId).orElseThrow(() -> new NotFoundException("Product not found"));
         return ResponseEntity.ok(productMapper.toDto(product));
     }
 

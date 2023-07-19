@@ -20,11 +20,6 @@ import java.util.List;
 public class BrandController {
     private final BrandService brandService;
 
-    @GetMapping("GetAllBrands")
-    public ResponseEntity<List<Brand>> getAllBrands(){
-        return brandService.findAll();
-    }
-
     @PostMapping("CreateBrand")
     @Validated(OnCreate.class)
     public ResponseEntity<BrandDto> createBrand(@Valid @RequestBody BrandDto brand){

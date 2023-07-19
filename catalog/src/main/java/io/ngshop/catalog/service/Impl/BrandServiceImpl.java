@@ -22,8 +22,8 @@ public class BrandServiceImpl implements BrandService {
     private final BrandMapper brandMapper;
 
     @Override
-    public ResponseEntity<List<Brand>> findAll() {
-        return ResponseEntity.ok(brandRepository.findAll());
+    public ResponseEntity<List<BrandDto>> findAll() {
+        return ResponseEntity.ok(brandRepository.findAll().stream().map(brandMapper::toDto).toList());
     }
 
     @Override
@@ -34,10 +34,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public ResponseEntity<BrandDto> update(String id, BrandDto brand) {
-        if (id.length() != 24){
-            throw new WrongObjectIdException("Wrong brand id");
-        }
-        Brand brandObj = brandRepository.findById(new ObjectId(id)).orElseThrow(() -> new NotFoundException("Brand not found"));
+        ObjectId objectId = CommonService.checkObjectId(id);
+        Brand brandObj = brandRepository.findById(objectId).orElseThrow(() -> new NotFoundException("Brand not found"));
         brandObj.setName(brand.getName());
         Brand save = brandRepository.save(brandObj);
         return ResponseEntity.ok(brandMapper.toDto(save));

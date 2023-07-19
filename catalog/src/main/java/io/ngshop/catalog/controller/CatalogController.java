@@ -1,7 +1,13 @@
 package io.ngshop.catalog.controller;
 
+import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.dto.TypeDto;
+import io.ngshop.catalog.model.Brand;
+import io.ngshop.catalog.model.Type;
+import io.ngshop.catalog.service.BrandService;
 import io.ngshop.catalog.service.ProductService;
+import io.ngshop.catalog.service.TypeService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +22,21 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CatalogController {
     private final ProductService productService;
+    private final TypeService typeService;
+    private final BrandService brandService;
+
+
+
+    @GetMapping("GetAllBrands")
+    public ResponseEntity<List<BrandDto>> getAllBrands(){
+        return brandService.findAll();
+    }
+
+    @GetMapping("GetAllTypes")
+    public ResponseEntity<List<TypeDto>> getAllTypes(){
+        return typeService.findAll();
+    }
+
     @GetMapping("/GetProductById/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable String id){
         return productService.getProductById(id);

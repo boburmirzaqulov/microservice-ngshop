@@ -3,6 +3,7 @@ package io.ngshop.catalog.mapper;
 import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.exception.WrongObjectIdException;
 import io.ngshop.catalog.model.Brand;
+import io.ngshop.catalog.service.impl.CommonService;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,6 @@ public class BrandMapper {
 
     public BrandDto toDto(Brand brand) {
         if (brand == null) return null;
-        if (brand.getId().toString().length() != 24) throw new WrongObjectIdException("Wrong Brand id");
-
         return new BrandDto(
                 brand.getId().toString(),
                 brand.getName()
@@ -21,11 +20,15 @@ public class BrandMapper {
 
     public Brand toEntity(BrandDto brandDto) {
         if (brandDto == null) return null;
-        if (brandDto.getId().length() != 24) throw new WrongObjectIdException("Wrong Brand id");
-
+        ObjectId objectId = null;
+        if (brandDto.getId() != null){
+            objectId = CommonService.checkObjectId(brandDto.getId());
+        }
         return new Brand(
-                new ObjectId(brandDto.getId()),
+                objectId,
                 brandDto.getName()
         );
     }
+
+
 }

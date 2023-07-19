@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface BrandService {
-    ResponseEntity<List<Brand>> findAll();
+    ResponseEntity<List<BrandDto>> findAll();
     ResponseEntity<BrandDto> create(BrandDto brand);
     ResponseEntity<BrandDto> update(String id,BrandDto brand);
     ResponseEntity<BrandDto> delete(String brandId);
