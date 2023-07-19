@@ -5,6 +5,7 @@ import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.repository.extension.ProductExtension;
+import io.ngshop.catalog.service.impl.CommonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -26,15 +27,17 @@ public class ProductExtensionImpl implements ProductExtension {
     private final BrandRepository brandRepository;
 
     @Override
-    public List<Product> findAllWithPagination(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search) {
+    public List<Product> findAllWithPagination(Optional<String> pageIndex, Optional<String> pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search) {
         Query query = new Query();
-        brandId.ifPresent(value -> query.addCriteria(Criteria.where("brandId").is(value.toString())));
-        typeId.ifPresent(value -> query.addCriteria(Criteria.where("typeId").is(value.toString())));
+        brandId.ifPresent(value -> query.addCriteria(Criteria.where("brandId").is(CommonService.checkObjectId(value))));
+        typeId.ifPresent(value -> query.addCriteria(Criteria.where("typeId").is(CommonService.checkObjectId(value))));
 
         if (pageIndex.isPresent() && pageSize.isPresent()){
-            query.with(PageRequest.of(pageIndex.get(), pageSize.get()));
+            if (!(pageIndex.get().equals("null") || pageSize.get().equals("null"))) {
+                query.with(PageRequest.of(Integer.parseInt(pageIndex.get())-1, Integer.parseInt(pageSize.get())));
+            }
         }
-        sort.ifPresent(s -> query.with(Sort.by(s)));
+        sort.ifPresent(s -> query.with(Sort.by("name")));
 
         return mongoTemplate.find(query, Product.class);
     }

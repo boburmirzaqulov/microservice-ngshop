@@ -1,6 +1,7 @@
 package io.ngshop.catalog.service.impl;
 
 import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Product;
@@ -34,9 +35,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getAllProducts(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search) {
+    public ResponseEntity<ProductResponse> getAllProducts(Optional<String> pageIndex, Optional<String> pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search) {
         List<Product> products = productRepository.findAllWithPagination(pageIndex,pageSize,brandId,typeId,sort,search);
-        return ResponseEntity.ok(products.stream().map(productMapper::toDto).toList());
+        List<ProductDTO> list = products.stream().map(productMapper::toDto).toList();
+        return ResponseEntity.ok(ProductResponse.builder().data(list).build());
     }
 
     @Override

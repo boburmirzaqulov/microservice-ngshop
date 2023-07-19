@@ -3,6 +3,7 @@ package io.ngshop.catalog.controller;
 import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.dto.TypeDto;
+import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Type;
 import io.ngshop.catalog.service.BrandService;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/Catalog")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class CatalogController {
     private final ProductService productService;
     private final TypeService typeService;
@@ -54,12 +56,12 @@ public class CatalogController {
     }
 
     @GetMapping("/GetAllProducts")
-    public ResponseEntity<List<ProductDTO>> getAllProduct(@RequestParam Optional<Integer> pageIndex,
-                                                          @RequestParam Optional<Integer> pageSize,
-                                                          @RequestParam Optional<ObjectId> brandId,
-                                                          @RequestParam Optional<ObjectId> typeId,
-                                                          @RequestParam Optional<String> sort,
-                                                          @RequestParam Optional<String> search){
+    public ResponseEntity<ProductResponse> getAllProduct(@RequestParam Optional<String> pageIndex,
+                                                         @RequestParam Optional<String> pageSize,
+                                                         @RequestParam Optional<String> brandId,
+                                                         @RequestParam Optional<String> typeId,
+                                                         @RequestParam Optional<String> sort,
+                                                         @RequestParam Optional<String> search){
         return productService.getAllProducts(pageIndex,pageSize,brandId,typeId,sort,search);
     }
 

@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductExtension {
-    List<Product> findAllWithPagination(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search);
+    List<Product> findAllWithPagination(Optional<String> pageIndex, Optional<String> pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search);
     List<Product> findByBrandName(String brand);
 }
