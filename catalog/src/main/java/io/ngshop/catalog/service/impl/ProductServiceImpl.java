@@ -39,8 +39,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getProductByBrand(String brand) {
-        List<Product> products = productRepository.findByBrandId(new ObjectId(brand));
+    public ResponseEntity<List<ProductDTO>> getProductByBrandName(String brand) {
+        List<Product> products = productRepository.findByBrandName(brand);
         return ResponseEntity.ok(products.stream().map(productMapper::toDto).toList());
     }
 

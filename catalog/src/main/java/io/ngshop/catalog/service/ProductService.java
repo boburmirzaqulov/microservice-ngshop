@@ -20,5 +20,5 @@ public interface ProductService {
 
     ResponseEntity<List<ProductDTO>> getAllProducts(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search);
 
-    ResponseEntity<List<ProductDTO>> getProductByBrand(String brand);
+    ResponseEntity<List<ProductDTO>> getProductByBrandName(String brand);
 }

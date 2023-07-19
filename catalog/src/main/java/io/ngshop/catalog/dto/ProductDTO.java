@@ -17,6 +17,7 @@ public class ProductDTO {
     private Double price;
     private String summary;
     private String imageFile;
-    private ObjectId brandId;
+    private String brandId;
+    private String typeId;
 
 }

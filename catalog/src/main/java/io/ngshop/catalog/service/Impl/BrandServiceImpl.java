@@ -18,4 +18,14 @@ public class BrandServiceImpl implements BrandService {
     public ResponseEntity<List<Brand>> findAll() {
         return ResponseEntity.ok(brandRepository.findAll());
     }
+
+    @Override
+    public ResponseEntity<Brand> create(Brand brand) {
+        return ResponseEntity.ok(brandRepository.save(brand));
+    }
+
+    @Override
+    public ResponseEntity<Brand> update(String id, Brand brand) {
+        return null;
+    }
 }

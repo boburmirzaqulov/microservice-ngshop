@@ -1,6 +1,9 @@
 package io.ngshop.catalog.repository.extension.impl;
 
+import io.ngshop.catalog.exception.NotFoundException;
+import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Product;
+import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.repository.extension.ProductExtension;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,7 @@ import java.util.Optional;
 @Slf4j
 public class ProductExtensionImpl implements ProductExtension {
     private final MongoTemplate mongoTemplate;
+    private final BrandRepository brandRepository;
 
     @Override
     public List<Product> findAllWithPagination(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search) {
@@ -33,5 +37,13 @@ public class ProductExtensionImpl implements ProductExtension {
         sort.ifPresent(s -> query.with(Sort.by(s)));
 
         return mongoTemplate.find(query, Product.class);
+    }
+
+    @Override
+    public List<Product> findByBrandName(String brand){
+        Brand brand1 = brandRepository.findBrandByName(brand).orElseThrow(() -> new NotFoundException("Brand not found"));
+        Query query = new Query();
+        query.addCriteria(Criteria.where("brandId").is(brand1.getId()));
+        return mongoTemplate.find(query,Product.class);
     }
 }

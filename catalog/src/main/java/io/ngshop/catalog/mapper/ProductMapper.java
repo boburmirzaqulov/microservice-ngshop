@@ -3,6 +3,7 @@ package io.ngshop.catalog.mapper;
 
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.model.Product;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 
@@ -16,7 +17,8 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getSummary(),
                 product.getImageFile(),
-                product.getBrandId()
+                product.getBrandId().toString(),
+                product.getTypeId().toString()
         );
     }
     public Product toEntity(ProductDTO productDto){
@@ -27,7 +29,8 @@ public class ProductMapper {
                 productDto.getPrice(),
                 productDto.getSummary(),
                 productDto.getImageFile(),
-                productDto.getBrandId()
+                new ObjectId(productDto.getBrandId()),
+                new ObjectId(productDto.getTypeId())
         );
     }
 }

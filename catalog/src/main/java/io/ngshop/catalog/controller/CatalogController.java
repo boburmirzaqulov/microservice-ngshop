@@ -28,8 +28,9 @@ public class CatalogController {
     }
 
     @GetMapping("/GetProductsByBrandName/{brand}")
-    public ResponseEntity<List<ProductDTO>> getProductByBrand(@PathVariable String brand){
-        return productService.getProductByBrand(brand);
+    public ResponseEntity<List<ProductDTO>> getProductByBrandName(@PathVariable String brand){
+        System.out.println(brand);
+        return productService.getProductByBrandName(brand);
     }
 
     @GetMapping("/GetAllProducts")

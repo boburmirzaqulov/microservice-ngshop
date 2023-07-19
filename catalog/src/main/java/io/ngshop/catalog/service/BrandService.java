@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface BrandService {
     ResponseEntity<List<Brand>> findAll();
+    ResponseEntity<Brand> create(Brand brand);
+    ResponseEntity<Brand> update(String id,Brand brand);
 }
