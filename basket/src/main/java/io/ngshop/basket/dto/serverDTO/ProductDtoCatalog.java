@@ -1,7 +1,7 @@
-package io.ngshop.basket.model;
+package io.ngshop.basket.dto.serverDTO;
 
-import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
@@ -9,7 +9,8 @@ import org.bson.types.ObjectId;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+@Builder
+public class ProductDtoCatalog {
     private ObjectId id;
     private String name;
     private String description;

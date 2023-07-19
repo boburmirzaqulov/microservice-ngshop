@@ -1,7 +1,7 @@
 package io.ngshop.basket.clients;
 
-import io.ngshop.basket.model.Product;
-import jakarta.ws.rs.Path;
+import io.ngshop.basket.dto.ProductDTO;
+import io.ngshop.basket.dto.serverDTO.ProductDtoCatalog;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Component
 public interface ProductClient {
     @RequestMapping(method = RequestMethod.GET, value = "/GetProductById/{productId}")
-    Product getProductsById(@PathVariable String productId);
+    ProductDtoCatalog getProductsById(@PathVariable String productId);
 }
