@@ -56,7 +56,8 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<ProductDTO> update(ProductDTO productDTO, String productId) {
         productRepository.findById(CommonService.checkObjectId(productId)).orElseThrow(() -> new NotFoundException("Product not found"));
         Product entity = productMapper.toEntity(productDTO);
-        return ResponseEntity.ok(productMapper.toDto(entity));
+        Product save = productRepository.save(entity);
+        return ResponseEntity.ok(productMapper.toDto(save));
     }
 
     @Override
