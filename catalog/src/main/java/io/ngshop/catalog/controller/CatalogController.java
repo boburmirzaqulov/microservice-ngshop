@@ -4,13 +4,10 @@ import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.dto.TypeDto;
 import io.ngshop.catalog.dto.response.ProductResponse;
-import io.ngshop.catalog.model.Brand;
-import io.ngshop.catalog.model.Type;
 import io.ngshop.catalog.service.BrandService;
 import io.ngshop.catalog.service.ProductService;
 import io.ngshop.catalog.service.TypeService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,12 +43,12 @@ public class CatalogController {
 
 
     @GetMapping("/GetProductByProductName/{productName}")
-    public ResponseEntity<List<ProductDTO>> getProductByProductName(@PathVariable String productName){
+    public ResponseEntity<ProductResponse> getProductByProductName(@PathVariable String productName){
         return productService.getByName(productName);
     }
 
     @GetMapping("/GetProductsByBrandName/{brand}")
-    public ResponseEntity<List<ProductDTO>> getProductByBrandName(@PathVariable String brand){
+    public ResponseEntity<ProductResponse> getProductByBrandName(@PathVariable String brand){
         return productService.getProductByBrandName(brand);
     }
 
@@ -76,7 +73,7 @@ public class CatalogController {
     }
 
     @DeleteMapping("/{id}/DeleteProduct")
-    public ResponseEntity<ProductDTO> delete(@PathVariable String id){
+    public ResponseEntity<Void> delete(@PathVariable String id){
         return productService.delete(id);
     }
 }

@@ -1,5 +1,9 @@
 package io.ngshop.catalog.dto;
 
+import io.ngshop.catalog.groups.OnCreate;
+import io.ngshop.catalog.groups.OnUpdate;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeDto {
+    @NotNull(groups = OnUpdate.class, message = "id cannot be null")
+    @Null(groups = OnCreate.class, message = "id most be null")
     private String id;
     private String name;
 }

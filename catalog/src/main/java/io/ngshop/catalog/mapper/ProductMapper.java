@@ -18,26 +18,20 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getSummary(),
                 product.getImageFile(),
-                product.getBrandId().toString(),
-                product.getTypeId().toString()
+                product.getBrandId() != null ? product.getBrandId().toString() : null,
+                product.getTypeId() != null ? product.getTypeId().toString() : null
         );
     }
     public Product toEntity(ProductDTO productDto){
-        if (productDto == null) return null;
-
-        ObjectId objectId = null;
-        if(productDto.getId() != null){
-            objectId = CommonService.checkObjectId(productDto.getId());
-        }
-        return new Product(
-                objectId,
+        return productDto == null ? null : new Product(
+                CommonService.checkObjectId(productDto.getBrandId()),
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
                 productDto.getSummary(),
                 productDto.getImageFile(),
-                new ObjectId(productDto.getBrandId()),
-                new ObjectId(productDto.getTypeId())
+                CommonService.checkObjectId(productDto.getBrandId()),
+                CommonService.checkObjectId(productDto.getTypeId())
         );
     }
 }

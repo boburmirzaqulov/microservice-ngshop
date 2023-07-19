@@ -29,9 +29,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getByName(String productName) {
+    public ResponseEntity<ProductResponse> getByName(String productName) {
         List<Product> products = productRepository.findByName(productName);
-        return ResponseEntity.ok(products.stream().map(productMapper::toDto).toList());
+        return ResponseEntity.ok(ProductResponse.builder().data(products.stream().map(productMapper::toDto).toList()).build());
     }
 
     @Override
@@ -42,9 +42,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getProductByBrandName(String brand) {
+    public ResponseEntity<ProductResponse> getProductByBrandName(String brand) {
         List<Product> products = productRepository.findByBrandName(brand);
-        return ResponseEntity.ok(products.stream().map(productMapper::toDto).toList());
+        return ResponseEntity.ok(ProductResponse.builder().data(products.stream().map(productMapper::toDto).toList()).build());
     }
 
     @Override
@@ -63,9 +63,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<ProductDTO> delete(String id) {
-        Product product = productRepository.findById(new ObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
+    public ResponseEntity<Void> delete(String id) {
+        Product product = productRepository.findById(CommonService.checkObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
         productRepository.delete(product);
-        return ResponseEntity.ok(productMapper.toDto(product));
+        return ResponseEntity.ok().build();
     }
 }

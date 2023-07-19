@@ -15,10 +15,10 @@ public interface ProductService {
 
     ResponseEntity<ProductDTO> update(ProductDTO productDTO,String productId);
 
-    ResponseEntity<ProductDTO> delete(String id);
-    ResponseEntity<List<ProductDTO>> getByName(String productName);
+    ResponseEntity<Void> delete(String id);
+    ResponseEntity<ProductResponse> getByName(String productName);
 
     ResponseEntity<ProductResponse> getAllProducts(Optional<String> pageIndex, Optional<String> pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search);
 
-    ResponseEntity<List<ProductDTO>> getProductByBrandName(String brand);
+    ResponseEntity<ProductResponse> getProductByBrandName(String brand);
 }

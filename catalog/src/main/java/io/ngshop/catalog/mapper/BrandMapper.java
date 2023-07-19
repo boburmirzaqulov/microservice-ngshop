@@ -19,13 +19,8 @@ public class BrandMapper {
     }
 
     public Brand toEntity(BrandDto brandDto) {
-        if (brandDto == null) return null;
-        ObjectId objectId = null;
-        if (brandDto.getId() != null){
-            objectId = CommonService.checkObjectId(brandDto.getId());
-        }
-        return new Brand(
-                objectId,
+        return brandDto == null ? null : new Brand(
+                null,
                 brandDto.getName()
         );
     }
