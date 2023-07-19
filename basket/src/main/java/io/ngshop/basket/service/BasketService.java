@@ -1,17 +1,17 @@
 package io.ngshop.basket.service;
 
-import io.ngshop.basket.Entity.BasketDTO;
+import io.ngshop.basket.dto.BasketV2DTO;
+import io.ngshop.basket.dto.response.BasketResponse;
+import io.ngshop.basket.dto.response.BasketRequest;
+import io.ngshop.basket.model.Basket;
 import org.springframework.http.ResponseEntity;
 
 public interface BasketService {
 
-    ResponseEntity<BasketDTO> getBasket(String userName);
 
-    ResponseEntity<BasketDTO> setBasket(BasketDTO basketDTO);
+    ResponseEntity<BasketResponse> getBasketByUsername(String username);
 
-    ResponseEntity<BasketDTO> checkoutBasket(BasketDTO basketDTO);
+    ResponseEntity<BasketRequest> createBasket(BasketRequest basketRequest);
 
-    void deleteBasket(String userName);
-
-    void createBasket(BasketDTO basketDTO);
+    ResponseEntity<Basket> checkoutBasket(BasketV2DTO basketV2DTO);
 }

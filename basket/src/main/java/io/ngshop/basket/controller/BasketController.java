@@ -1,35 +1,36 @@
 package io.ngshop.basket.controller;
-
-import io.ngshop.basket.Entity.BasketDTO;
+import io.ngshop.basket.dto.BasketV2DTO;
+import io.ngshop.basket.dto.response.BasketResponse;
+import io.ngshop.basket.dto.response.BasketRequest;
+import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.service.BasketService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("Basket")
-@RequiredArgsConstructor
 public class BasketController {
-    private final BasketService basketService;
-    @GetMapping("/GetBasket/{userName}")
-    public ResponseEntity<BasketDTO> getBasket(@PathVariable String userName){
-        return basketService.getBasket(userName);
+
+    @Autowired
+    private BasketService basketService;
+
+    @GetMapping("/GetBasket/{username}")
+    public ResponseEntity<BasketResponse> getBasket(@PathVariable String username) {
+        return basketService.getBasketByUsername(username);
     }
-    @PutMapping("/CreateBasket")
-    public ResponseEntity<BasketDTO> setBasket(@RequestBody BasketDTO basketDTO){
-        return basketService.setBasket(basketDTO);
+
+    @PostMapping("/CreateBasket")
+    public ResponseEntity<BasketRequest> createBasket(@RequestBody BasketRequest basketRequest) {
+        return basketService.createBasket(basketRequest);
+
     }
+
     @PostMapping("/CheckoutV2")
-    public ResponseEntity<BasketDTO> checkoutBasket(@RequestBody BasketDTO basketDTO){
-        return basketService.checkoutBasket(basketDTO);
+    public ResponseEntity<Basket> checkoutBasket(@RequestBody BasketV2DTO basketV2DTO) {
+        // Do checkout process
+        return basketService.checkoutBasket(basketV2DTO);
     }
-    @DeleteMapping("/DeleteBasket/{userName}")
-    public void deleteBasket(@PathVariable String userName ){
-        basketService.deleteBasket(userName);
-    }
-    @PostMapping()
-    public void createBasket(@RequestBody BasketDTO basketDTO){
-        basketService.createBasket(basketDTO);
-    }
+
 
 }
