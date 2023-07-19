@@ -1,4 +1,4 @@
-package io.ngshop.basket.Entity;
+package io.ngshop.basket.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class BasketDTO {
-
     private String ProductId;
     private Integer quantity;
     private String imageFile;
