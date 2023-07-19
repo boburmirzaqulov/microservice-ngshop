@@ -16,5 +16,5 @@ public interface DiscountService {
 
     ResponseEntity<DiscountDto> updateDiscount(DiscountDto discountDto);
 
-    ResponseEntity<DiscountDto> deleteDiscount(Long id);
+    void deleteDiscount(Long id);
 }

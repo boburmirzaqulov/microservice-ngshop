@@ -1,6 +1,7 @@
 package io.ngshop.discount.service.impl;
 
 import io.ngshop.discount.dto.DiscountDto;
+import io.ngshop.discount.exception.NotFoundException;
 import io.ngshop.discount.model.Discount;
 import io.ngshop.discount.mapper.DiscountMapper;
 import io.ngshop.discount.repository.DiscountRepository;
@@ -38,18 +39,14 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public ResponseEntity<DiscountDto> updateDiscount(DiscountDto discountDto) {
-        Optional<Discount> optionalDiscount = discountRepository.findById(discountDto.id());
-        return ResponseEntity.ok(discountMapper
-                .toDto(discountRepository
-                        .save(discountMapper
-                                .toEntity(discountDto))));
+        discountRepository.findById(discountDto.getId()).orElseThrow(() -> new NotFoundException("Discount not found"));
+        Discount save = discountRepository.save(discountMapper.toEntity(discountDto));
+        return ResponseEntity.ok(discountMapper.toDto(save));
     }
 
     @Override
-    public ResponseEntity<DiscountDto> deleteDiscount(Long id) {
-        Optional<Discount> discountOptional = discountRepository.findById(id);
-        discountRepository.delete(discountOptional.get());
-        return ResponseEntity.ok(discountMapper.toDto(discountOptional.get()));
-
+    public void deleteDiscount(Long id) {
+        Discount discountOptional = discountRepository.findById(id).orElseThrow();
+        discountRepository.delete(discountOptional);
     }
 }

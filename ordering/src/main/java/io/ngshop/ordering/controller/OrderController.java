@@ -4,6 +4,7 @@ import io.ngshop.ordering.dto.OrderDTO;
 import io.ngshop.ordering.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
+
+    @Value("${spring.application.name}")
+    private String test;
+
+    @GetMapping("test")
+    public String getName(){
+        return test;
+    }
     @GetMapping("/v1/Order/{userName}")
     public ResponseEntity<OrderDTO> getOrderByUserName(@PathVariable String userName){
         return orderService.getOrderByUserName(userName);

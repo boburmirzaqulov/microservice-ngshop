@@ -4,6 +4,7 @@ import io.ngshop.discount.dto.DiscountDto;
 import io.ngshop.discount.service.DiscountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +16,13 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class DiscountController {
-
     private final DiscountService discountService;
 
     @GetMapping("/{id}")
     public ResponseEntity<DiscountDto> getDiscountById(@PathVariable Long id){
         return discountService.getDiscountById(id);
     }
+
 
     @GetMapping
     public ResponseEntity<List<DiscountDto>> getAllDiscount(@RequestParam Optional<Integer> offset, @RequestParam Optional<Integer> limit){

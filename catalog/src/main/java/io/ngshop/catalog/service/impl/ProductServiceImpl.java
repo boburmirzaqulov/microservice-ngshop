@@ -1,6 +1,7 @@
 package io.ngshop.catalog.service.impl;
 
 import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,31 +22,44 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDto) {
+    public ResponseEntity<ProductDTO> getProductById(ObjectId id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDTO>> getByName(String productName) {
+        List<Product> products = productRepository.findByName(productName);
+        return ResponseEntity.ok(products.stream().map(productMapper::toDto).toList());
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDTO>> getAllProducts(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search) {
+        List<Product> products = productRepository.findAllWithPagination(pageIndex,pageSize,brandId,typeId,sort,search);
+        return ResponseEntity.ok(products.stream().map(productMapper::toDto).toList());
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDTO>> getProductByBrand(String brand) {
+        List<Product> products = productRepository.findByBrandId(new ObjectId(brand));
+        return ResponseEntity.ok(products.stream().map(productMapper::toDto).toList());
+    }
+
+    @Override
+    public ResponseEntity<ProductDTO> create(ProductDTO productDto) {
         Product product = productMapper.toEntity(productDto);
         Product save = productRepository.save(product);
         return ResponseEntity.ok(productMapper.toDto(save));
     }
 
     @Override
-    public ResponseEntity<ProductDTO> getProductById(ObjectId id) {
+    public ResponseEntity<ProductDTO> update(ProductDTO productDTO) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<Product> all = productRepository.findAll();
-        List<ProductDTO> list = all.stream().map(productMapper::toDto).collect(Collectors.toList());
-        return ResponseEntity.ok(list);
-    }
-
-    @Override
-    public ResponseEntity<ProductDTO> updateProduct(ProductDTO productDTO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Void> deleteProduct(Long id) {
-        return null;
+    public ResponseEntity<ProductDTO> delete(String id) {
+        Product product = productRepository.findById(new ObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
+        productRepository.delete(product);
+        return ResponseEntity.ok(productMapper.toDto(product));
     }
 }
