@@ -1,10 +1,8 @@
 package io.ngshop.catalog.controller;
 
 import io.ngshop.catalog.dto.BrandDto;
-import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.dto.TypeDto;
-import io.ngshop.catalog.model.Brand;
-import io.ngshop.catalog.model.Type;
 import io.ngshop.catalog.service.BrandService;
 import io.ngshop.catalog.service.ProductService;
 import io.ngshop.catalog.service.TypeService;
@@ -38,23 +36,23 @@ public class CatalogController {
     }
 
     @GetMapping("/GetProductById/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable String id){
+    public ResponseEntity<ProductDto> getProductById(@PathVariable String id){
         return productService.getProductById(id);
     }
 
 
     @GetMapping("/GetProductByProductName/{productName}")
-    public ResponseEntity<List<ProductDTO>> getProductByProductName(@PathVariable String productName){
+    public ResponseEntity<List<ProductDto>> getProductByProductName(@PathVariable String productName){
         return productService.getByName(productName);
     }
 
     @GetMapping("/GetProductsByBrandName/{brand}")
-    public ResponseEntity<List<ProductDTO>> getProductByBrandName(@PathVariable String brand){
+    public ResponseEntity<List<ProductDto>> getProductByBrandName(@PathVariable String brand){
         return productService.getProductByBrandName(brand);
     }
 
     @GetMapping("/GetAllProducts")
-    public ResponseEntity<List<ProductDTO>> getAllProduct(@RequestParam Optional<Integer> pageIndex,
+    public ResponseEntity<List<ProductDto>> getAllProduct(@RequestParam Optional<Integer> pageIndex,
                                                           @RequestParam Optional<Integer> pageSize,
                                                           @RequestParam Optional<ObjectId> brandId,
                                                           @RequestParam Optional<ObjectId> typeId,
@@ -64,17 +62,17 @@ public class CatalogController {
     }
 
     @PostMapping("/CreateProduct")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO){
+    public ResponseEntity<ProductDto> create(@RequestBody ProductDto productDTO){
         return productService.create(productDTO);
     }
 
     @PutMapping("/UpdateProduct/{productId}")
-    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO, @PathVariable String productId){
+    public ResponseEntity<ProductDto> update(@RequestBody ProductDto productDTO, @PathVariable String productId){
         return productService.update(productDTO,productId);
     }
 
     @DeleteMapping("/{id}/DeleteProduct")
-    public ResponseEntity<ProductDTO> delete(@PathVariable String id){
+    public ResponseEntity<ProductDto> delete(@PathVariable String id){
         return productService.delete(id);
     }
 }
