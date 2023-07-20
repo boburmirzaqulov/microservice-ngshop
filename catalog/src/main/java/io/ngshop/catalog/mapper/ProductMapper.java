@@ -3,8 +3,7 @@ package io.ngshop.catalog.mapper;
 
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.model.Product;
-import io.ngshop.catalog.service.impl.CommonService;
-import org.bson.types.ObjectId;
+import io.ngshop.catalog.service.CommonService;
 import org.springframework.stereotype.Service;
 
 

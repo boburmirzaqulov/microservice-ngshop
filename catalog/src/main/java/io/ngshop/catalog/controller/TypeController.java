@@ -3,7 +3,6 @@ package io.ngshop.catalog.controller;
 import io.ngshop.catalog.dto.TypeDto;
 import io.ngshop.catalog.groups.OnCreate;
 import io.ngshop.catalog.groups.OnUpdate;
-import io.ngshop.catalog.model.Type;
 import io.ngshop.catalog.service.TypeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

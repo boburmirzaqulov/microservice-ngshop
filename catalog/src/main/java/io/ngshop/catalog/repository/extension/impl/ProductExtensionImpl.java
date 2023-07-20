@@ -5,7 +5,7 @@ import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.repository.extension.ProductExtension;
-import io.ngshop.catalog.service.impl.CommonService;
+import io.ngshop.catalog.service.CommonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -40,7 +40,10 @@ public class ProductExtensionImpl implements ProductExtension {
             if (Set.of("name","id","price","description","summary","bradId","typeId").contains(s)) query.with(Sort.by(s));
         });
 
-        return mongoTemplate.find(query, Product.class);
+        List<Product> products = mongoTemplate.find(query, Product.class);
+        System.out.println(products);
+        return products;
+
     }
 
     @Override

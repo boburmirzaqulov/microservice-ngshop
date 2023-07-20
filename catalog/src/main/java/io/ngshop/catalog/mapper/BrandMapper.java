@@ -1,10 +1,7 @@
 package io.ngshop.catalog.mapper;
 
 import io.ngshop.catalog.dto.BrandDto;
-import io.ngshop.catalog.exception.WrongObjectIdException;
 import io.ngshop.catalog.model.Brand;
-import io.ngshop.catalog.service.impl.CommonService;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 @Service
