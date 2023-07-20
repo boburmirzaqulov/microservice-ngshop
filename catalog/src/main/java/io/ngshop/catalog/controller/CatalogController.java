@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CatalogController {
     private final CatalogService productService;
-    @GetMapping("/GetAllProducts")
+    @GetMapping("/GetAllProductsPagination")
     public ResponseEntity<ProductResponse> getAllProduct(@RequestParam Optional<String> pageIndex,
                                                          @RequestParam Optional<String> pageSize,
                                                          @RequestParam Optional<String> brandId,

@@ -18,6 +18,6 @@ public class Product {
     private Double price;
     private String summary;
     private String imageFile;
-    private ObjectId brandId;
-    private ObjectId typeId;
+    private String brandId;
+    private String typeId;
 }

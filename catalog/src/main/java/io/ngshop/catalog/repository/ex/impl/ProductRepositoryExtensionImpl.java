@@ -2,6 +2,7 @@ package io.ngshop.catalog.repository.ex.impl;
 
 import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.dto.response.ProductResponse;
+import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Product;
@@ -28,9 +29,9 @@ public class ProductRepositoryExtensionImpl implements ProductRepositoryExtensio
     private final MongoTemplate mongoTemplate;
     @Override
     public List<Product> getProductsByBrandName(String brandName) {
-        Brand brand = brandRepository.findByName(brandName).orElseThrow();
+        Brand brand = brandRepository.findByName(brandName).orElseThrow(() -> new NotFoundException("Brand not found"));
         Query query = new Query();
-        query.addCriteria(Criteria.where("brandId").is(brand.getId()));
+        query.addCriteria(Criteria.where("brandId").is(brand.getId().toString()));
         return mongoTemplate.find(query, Product.class);
     }
 

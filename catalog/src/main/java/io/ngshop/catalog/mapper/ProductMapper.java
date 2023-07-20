@@ -14,8 +14,8 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getSummary(),
                 product.getImageFile(),
-                product.getBrandId().toString(),
-                product.getTypeId().toString()
+                product.getBrandId(),
+                product.getTypeId()
         );
     }
     public Product toEntity(ProductDto productDto){
@@ -26,8 +26,8 @@ public class ProductMapper {
                 productDto.getPrice(),
                 productDto.getSummary(),
                 productDto.getImageFile(),
-                new ObjectId(productDto.getBrandId()),
-                new ObjectId(productDto.getTypeId())
+                productDto.getBrandId(),
+                productDto.getTypeId()
         );
     }
 }

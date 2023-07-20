@@ -4,6 +4,7 @@ import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.dto.TypeDto;
 import io.ngshop.catalog.dto.response.ProductResponse;
+import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.BrandMapper;
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.mapper.TypeMapper;
@@ -33,7 +34,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public ResponseEntity<ProductDto> getProductById(ObjectId id) {
-        Product product = productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
         return ResponseEntity.ok(productMapper.toDto(product));
     }
 
