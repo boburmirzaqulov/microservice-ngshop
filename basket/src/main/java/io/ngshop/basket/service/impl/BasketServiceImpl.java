@@ -32,6 +32,9 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) {
+
+
+
         for (ProductDTO productDTO: basketResponse.getItems()) {
             String productName = productDTO.getProductName();
             DiscountDTO discountDTO = discountClient.getDiscount(productName);
@@ -39,10 +42,18 @@ public class BasketServiceImpl implements BasketService {
             productDTO.setPrice(productDTO.getPrice()-amount);
         }
 
-        Basket basket = basketMapper.toEntity(basketResponse);
-        basket = basketRepository.save(basket);
+        String username = basketResponse.getUserName();
 
-        return ResponseEntity.ok(basketMapper.toDto(basket));
+        if (username != null){
+
+
+        }
+
+
+        Basket basket = basketMapper.toEntity(basketResponse);
+        Basket save = basketRepository.save(basket);
+
+        return ResponseEntity.ok(basketMapper.toDto(save));
     }
 
     @Override
