@@ -5,16 +5,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
-public class Discount {
+@NoArgsConstructor
+@Entity
+public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String productName;
+    private String description;
+    private Double amount;
 }
+
+
+//    public int Id { get; set; }
+//public string ProductName { get; set; }
+//public string Description { get; set; }
+//public int Amount { get; set; }
