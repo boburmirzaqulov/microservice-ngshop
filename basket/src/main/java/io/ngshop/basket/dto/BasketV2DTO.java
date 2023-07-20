@@ -1,0 +1,17 @@
+package io.ngshop.basket.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class BasketV2DTO {
+
+    private String username;
+    private Double totalPrice;
+}
+

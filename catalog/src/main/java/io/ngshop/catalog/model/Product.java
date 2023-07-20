@@ -22,4 +22,5 @@ public class Product {
     private String summary;
     private String imageFile;
     private ObjectId brandId;
+    private ObjectId typeId;
 }
