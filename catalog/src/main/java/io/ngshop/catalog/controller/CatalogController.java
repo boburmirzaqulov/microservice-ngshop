@@ -38,7 +38,7 @@ public class CatalogController {
     }
 
     @GetMapping("/GetProductById/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable String id){
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable String id){
         return productService.getProductById(id);
     }
 
@@ -65,17 +65,16 @@ public class CatalogController {
     }
 
     @PostMapping("/CreateProduct")
-    public ResponseEntity<ProductDto> create(@RequestBody ProductDto productDTO){
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO){
         return productService.create(productDTO);
     }
 
     @PutMapping("/UpdateProduct/{productId}")
-    public ResponseEntity<ProductDto> update(@RequestBody ProductDto productDTO, @PathVariable String productId){
+    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO, @PathVariable String productId){
         return productService.update(productDTO,productId);
     }
 
     @DeleteMapping("/{id}/DeleteProduct")
-
     public ResponseEntity<Void> delete(@PathVariable String id){
         return productService.delete(id);
     }
