@@ -1,6 +1,6 @@
 package io.ngshop.catalog.controller;
 
-import io.ngshop.catalog.dto.BrandDto;
+import io.ngshop.catalog.dto.BrandDTO;
 import io.ngshop.catalog.groups.OnCreate;
 import io.ngshop.catalog.groups.OnUpdate;
 import io.ngshop.catalog.service.BrandService;
@@ -19,18 +19,18 @@ public class BrandController {
 
     @PostMapping("CreateBrand")
     @Validated(OnCreate.class)
-    public ResponseEntity<BrandDto> createBrand(@Valid @RequestBody BrandDto brand){
+    public ResponseEntity<BrandDTO> createBrand(@Valid @RequestBody BrandDTO brand){
         return brandService.create(brand);
     }
 
     @PutMapping("/UpdateBrand/{brandId}")
     @Validated(OnUpdate.class)
-    public ResponseEntity<BrandDto> updateBrand(@Valid @RequestBody BrandDto brand,@PathVariable String brandId){
+    public ResponseEntity<BrandDTO> updateBrand(@Valid @RequestBody BrandDTO brand, @PathVariable String brandId){
         return brandService.update(brandId,brand);
     }
 
     @DeleteMapping("/DeleteBrand/{brandId}")
-    public ResponseEntity<BrandDto> deleteBrand(@PathVariable String brandId){
+    public ResponseEntity<BrandDTO> deleteBrand(@PathVariable String brandId){
         return brandService.delete(brandId);
     }
 }

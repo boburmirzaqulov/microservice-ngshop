@@ -1,6 +1,6 @@
 package io.ngshop.catalog.service.impl;
 
-import io.ngshop.catalog.dto.BrandDto;
+import io.ngshop.catalog.dto.BrandDTO;
 import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.BrandMapper;
 import io.ngshop.catalog.model.Brand;
@@ -20,18 +20,18 @@ public class BrandServiceImpl implements BrandService {
     private final BrandMapper brandMapper;
 
     @Override
-    public ResponseEntity<List<BrandDto>> findAll() {
+    public ResponseEntity<List<BrandDTO>> findAll() {
         return ResponseEntity.ok(brandRepository.findAll().stream().map(brandMapper::toDto).toList());
     }
 
     @Override
-    public ResponseEntity<BrandDto> create(BrandDto brandDto) {
+    public ResponseEntity<BrandDTO> create(BrandDTO brandDto) {
         Brand brand = brandMapper.toEntity(brandDto);
         return ResponseEntity.ok(brandMapper.toDto(brandRepository.save(brand)));
     }
 
     @Override
-    public ResponseEntity<BrandDto> update(String id, BrandDto brand) {
+    public ResponseEntity<BrandDTO> update(String id, BrandDTO brand) {
         ObjectId objectId = CommonService.checkObjectId(id);
         Brand brandObj = brandRepository.findById(objectId).orElseThrow(() -> new NotFoundException("Brand not found"));
         brandObj.setName(brand.getName());
@@ -40,7 +40,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public ResponseEntity<BrandDto> delete(String brandId) {
+    public ResponseEntity<BrandDTO> delete(String brandId) {
         Brand brand = brandRepository.findById(new ObjectId(brandId)).orElseThrow(() -> new NotFoundException("Brand not found"));
         brandRepository.delete(brand);
         return ResponseEntity.ok(brandMapper.toDto(brand));

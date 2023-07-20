@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TypeDto {
+public class TypeDTO {
     @NotNull(groups = OnUpdate.class, message = "id cannot be null")
     @Null(groups = OnCreate.class, message = "id most be null")
     private String id;

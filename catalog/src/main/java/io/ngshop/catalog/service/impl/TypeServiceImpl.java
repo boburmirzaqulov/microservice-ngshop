@@ -1,6 +1,6 @@
 package io.ngshop.catalog.service.impl;
 
-import io.ngshop.catalog.dto.TypeDto;
+import io.ngshop.catalog.dto.TypeDTO;
 import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.TypeMapper;
 import io.ngshop.catalog.model.Type;
@@ -19,20 +19,20 @@ public class TypeServiceImpl implements TypeService {
     private final TypeMapper typeMapper;
 
     @Override
-    public ResponseEntity<List<TypeDto>> findAll() {
+    public ResponseEntity<List<TypeDTO>> findAll() {
         List<Type> all = typeRepository.findAll();
         return ResponseEntity.ok(all.stream().map(typeMapper::toDto).toList());
     }
 
     @Override
-    public ResponseEntity<TypeDto> create(TypeDto typeDto) {
+    public ResponseEntity<TypeDTO> create(TypeDTO typeDto) {
         Type entity = typeMapper.toEntity(typeDto);
         Type save = typeRepository.save(entity);
         return ResponseEntity.ok(typeMapper.toDto(save));
     }
 
     @Override
-    public ResponseEntity<TypeDto> update(TypeDto typeDto) {
+    public ResponseEntity<TypeDTO> update(TypeDTO typeDto) {
         Type type = typeRepository.findById(CommonService.checkObjectId(typeDto.getId())).orElseThrow(() -> new NotFoundException("Type not found"));
         type.setName(typeDto.getName());
         Type save = typeRepository.save(type);

@@ -1,8 +1,8 @@
 package io.ngshop.catalog.controller;
 
-import io.ngshop.catalog.dto.BrandDto;
+import io.ngshop.catalog.dto.BrandDTO;
 import io.ngshop.catalog.dto.ProductDTO;
-import io.ngshop.catalog.dto.TypeDto;
+import io.ngshop.catalog.dto.TypeDTO;
 import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.service.BrandService;
 import io.ngshop.catalog.service.ProductService;
@@ -27,12 +27,12 @@ public class CatalogController {
 
 
     @GetMapping("GetAllBrands")
-    public ResponseEntity<List<BrandDto>> getAllBrands(){
+    public ResponseEntity<List<BrandDTO>> getAllBrands(){
         return brandService.findAll();
     }
 
     @GetMapping("GetAllTypes")
-    public ResponseEntity<List<TypeDto>> getAllTypes(){
+    public ResponseEntity<List<TypeDTO>> getAllTypes(){
         return typeService.findAll();
     }
 

@@ -1,12 +1,12 @@
 package io.ngshop.catalog.service;
 
-import io.ngshop.catalog.dto.TypeDto;
+import io.ngshop.catalog.dto.TypeDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface TypeService {
-    ResponseEntity<List<TypeDto>> findAll();
-    ResponseEntity<TypeDto> create(TypeDto typeDto);
-    ResponseEntity<TypeDto> update(TypeDto typeDto);
+    ResponseEntity<List<TypeDTO>> findAll();
+    ResponseEntity<TypeDTO> create(TypeDTO typeDto);
+    ResponseEntity<TypeDTO> update(TypeDTO typeDto);
 }
