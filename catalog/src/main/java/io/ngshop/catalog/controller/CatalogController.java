@@ -20,35 +20,35 @@ public class CatalogController {
         public ResponseEntity<ProductDto> getProductById(@PathVariable String id){
             return productService.getProductById(new ObjectId(id));
     }
-    @GetMapping("GetProductByProductName/{productName}")
+    @GetMapping("/GetProductByProductName/{productName}")
     public ResponseEntity<List<ProductDto>> getProductByProductName(@PathVariable String productName){
         return productService.getProductByProductName(productName);
     }
-    @GetMapping("GetAllProducts")
+    @GetMapping("/GetAllProducts")
     public ResponseEntity<List<ProductDto>> getAllProducts(){
         return productService.getAllProducts();
     }
-    @GetMapping("GetAllBrands")
+    @GetMapping("/GetAllBrands")
     public ResponseEntity<List<BrandDto>> getAllBrands(){
         return productService.getAllBrands();
     }
-    @GetMapping("GetAllTypes")
+    @GetMapping("/GetAllTypes")
     public ResponseEntity<List<TypeDto>> getAllTypes(){
         return productService.getAllTypes();
     }
-    @GetMapping("GetProductsByBrandName/{brand}")
+    @GetMapping("/GetProductsByBrandName/{brand}")
     public ResponseEntity<List<ProductDto>> getProductsByBrandName(@PathVariable String brand){
         return productService.getProductsByBrandName(brand);
     }
-    @PostMapping("CreateProduct")
+    @PostMapping("/CreateProduct")
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
         return productService.createProduct(productDto);
     }
-    @PutMapping("UpdateProduct")
+    @PutMapping("/UpdateProduct")
     public boolean updateProduct(@RequestBody ProductDto productDto){
         return productService.updateProduct(productDto);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public boolean deleteProduct(@PathVariable String id){
         return productService.deleteProduct(new ObjectId(id));
     }

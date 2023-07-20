@@ -17,10 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.time.chrono.IsoEra;
 import java.util.List;
 
 @Service
@@ -48,6 +44,7 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public ResponseEntity<List<ProductDto>> getAllProducts() {
         List<Product> all = productRepository.findAll();
+        System.out.println(all);
         return ResponseEntity.ok(all.stream().map(productMapper::toDto).toList());
     }
 
@@ -65,7 +62,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public ResponseEntity<List<ProductDto>> getProductsByBrandName(String brand) {
-        return null;
+        return ResponseEntity.ok(productRepository.getProductsByBrandName(brand).stream().map(productMapper::toDto).toList());
     }
 
     @Override
