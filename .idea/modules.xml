@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/admin-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/admin-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/najot ngshop.iml" filepath="$PROJECT_DIR$/.idea/najot ngshop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ordering.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ordering.main.iml" />
     </modules>
   </component>
 </project>
