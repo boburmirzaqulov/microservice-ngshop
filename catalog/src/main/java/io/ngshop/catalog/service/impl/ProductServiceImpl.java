@@ -1,4 +1,4 @@
-package io.ngshop.catalog.service.impl;
+package io.ngshop.catalog.service.Impl;
 
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.mapper.ProductMapper;
