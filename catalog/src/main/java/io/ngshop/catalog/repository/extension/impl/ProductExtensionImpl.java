@@ -1,13 +1,16 @@
 package io.ngshop.catalog.repository.extension.impl;
 
+import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.exception.NotFoundException;
+import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.repository.extension.ProductExtension;
+import io.ngshop.catalog.service.impl.CommonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.types.ObjectId;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -24,19 +28,27 @@ import java.util.Optional;
 public class ProductExtensionImpl implements ProductExtension {
     private final MongoTemplate mongoTemplate;
     private final BrandRepository brandRepository;
+    private final ProductMapper productMapper;
 
     @Override
-    public List<Product> findAllWithPagination(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search) {
+    public ProductResponse findAllWithPagination(Optional<String> pageIndex, Optional<String> pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search) {
         Query query = new Query();
-        brandId.ifPresent(value -> query.addCriteria(Criteria.where("brandId").is(value.toString())));
-        typeId.ifPresent(value -> query.addCriteria(Criteria.where("typeId").is(value.toString())));
-
+        brandId.ifPresent(value -> query.addCriteria(Criteria.where("brandId").is(CommonService.checkObjectId(value))));
+        typeId.ifPresent(value -> query.addCriteria(Criteria.where("typeId").is(CommonService.checkObjectId(value))));
+        search.ifPresent(value -> query.addCriteria(Criteria.where("name").regex(value.toLowerCase())));
+        int size = mongoTemplate.find(query, Product.class).size();
         if (pageIndex.isPresent() && pageSize.isPresent()){
-            query.with(PageRequest.of(pageIndex.get(), pageSize.get()));
+            if (!(pageIndex.get().equals("null") || pageSize.get().equals("null"))) {
+                query.with(PageRequest.of(Integer.parseInt(pageIndex.get())-1, Integer.parseInt(pageSize.get())));
+            }
         }
-        sort.ifPresent(s -> query.with(Sort.by(s)));
+        sort.ifPresent(s -> {
+            if (Set.of("name","id","price","description","summary","bradId","typeId").contains(s)) query.with(Sort.by(s));
+        });
 
-        return mongoTemplate.find(query, Product.class);
+        List<ProductDTO> list = mongoTemplate.find(query, Product.class).stream().map(productMapper::toDto).toList();
+        return ProductResponse.builder().data(list).pageIndex(Integer.valueOf(pageIndex.get())).pageSize(Integer.valueOf(pageSize.get())).count(size).build();
+
     }
 
     @Override

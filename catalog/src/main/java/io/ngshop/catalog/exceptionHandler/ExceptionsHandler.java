@@ -1,6 +1,6 @@
 package io.ngshop.catalog.exceptionHandler;
 
-import io.ngshop.catalog.dto.exceptionsDto.ErrorDto;
+import io.ngshop.catalog.dto.exceptionsDTO.ErrorDTO;
 import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.exception.WrongObjectIdException;
 import org.springframework.http.HttpHeaders;
@@ -21,14 +21,14 @@ import java.util.stream.Collectors;
 public class ExceptionsHandler {
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDto notFoundHandler(NotFoundException e){
-        return ErrorDto.builder().error(e.getMessage()).build();
+    public ErrorDTO notFoundHandler(NotFoundException e){
+        return ErrorDTO.builder().error(e.getMessage()).build();
     }
 
     @ExceptionHandler(WrongObjectIdException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDto notFoundHandler(WrongObjectIdException e){
-        return ErrorDto.builder().error(e.getMessage()).build();
+    public ErrorDTO notFoundHandler(WrongObjectIdException e){
+        return ErrorDTO.builder().error(e.getMessage()).build();
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex) {
