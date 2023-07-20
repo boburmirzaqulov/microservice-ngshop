@@ -22,10 +22,16 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public ResponseEntity<ProductDTO> getProductById(String id) {
-        ObjectId objectId = CommonService.checkObjectId(id);
-        Product product = productRepository.findById(objectId).orElseThrow(() -> new NotFoundException("Product not found"));
-        return ResponseEntity.ok(productMapper.toDto(product));
+    public ResponseEntity<ProductDto> create(ProductDto productDto) {
+        Product product = productMapper.toEntity(productDto);
+        Product save = productRepository.save(product);
+        return ResponseEntity.ok(productMapper.toDto(save));
+    }
+
+    public ResponseEntity<List<ProductDto>> getProducts() {
+        List<Product> all = productRepository.findAll();
+        List<ProductDto> list = all.stream().map(productMapper::toDto).toList();
+        return ResponseEntity.ok(list);
     }
 
     @Override
@@ -68,5 +74,10 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(CommonService.checkObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
         productRepository.delete(product);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        return null;
     }
 }

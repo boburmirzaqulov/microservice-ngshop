@@ -1,5 +1,6 @@
 package io.ngshop.catalog.controller;
 
+
 import io.ngshop.catalog.dto.BrandDTO;
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.dto.TypeDTO;
@@ -8,12 +9,12 @@ import io.ngshop.catalog.service.BrandService;
 import io.ngshop.catalog.service.ProductService;
 import io.ngshop.catalog.service.TypeService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/Catalog")
@@ -37,7 +38,7 @@ public class CatalogController {
     }
 
     @GetMapping("/GetProductById/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable String id){
+    public ResponseEntity<ProductDto> getProductById(@PathVariable String id){
         return productService.getProductById(id);
     }
 
@@ -59,20 +60,22 @@ public class CatalogController {
                                                          @RequestParam Optional<String> typeId,
                                                          @RequestParam Optional<String> sort,
                                                          @RequestParam Optional<String> search){
+
         return productService.getAllProducts(pageIndex,pageSize,brandId,typeId,sort,search);
     }
 
     @PostMapping("/CreateProduct")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO){
+    public ResponseEntity<ProductDto> create(@RequestBody ProductDto productDTO){
         return productService.create(productDTO);
     }
 
     @PutMapping("/UpdateProduct/{productId}")
-    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO, @PathVariable String productId){
+    public ResponseEntity<ProductDto> update(@RequestBody ProductDto productDTO, @PathVariable String productId){
         return productService.update(productDTO,productId);
     }
 
     @DeleteMapping("/{id}/DeleteProduct")
+
     public ResponseEntity<Void> delete(@PathVariable String id){
         return productService.delete(id);
     }

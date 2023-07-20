@@ -1,7 +1,6 @@
 package io.ngshop.basket.controller;
 import io.ngshop.basket.dto.BasketV2DTO;
 import io.ngshop.basket.dto.response.BasketResponse;
-import io.ngshop.basket.dto.response.BasketRequest;
 import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,16 @@ public class BasketController {
         return basketService.getBasketByUsername(username);
     }
 
-    @PostMapping("/CreateBasket")
-    public ResponseEntity<BasketRequest> createBasket(@RequestBody BasketRequest basketRequest) {
-        return basketService.createBasket(basketRequest);
 
+    @PostMapping("/CreateBasket")
+    public ResponseEntity<BasketResponse> createBasket(@RequestBody BasketResponse basketResponse) {
+        return basketService.createBasket(basketResponse);
+
+    }
+
+    @DeleteMapping("/DeleteBasket{username}")
+    public ResponseEntity<Void> deleteBasket(@PathVariable String username){
+        return basketService.deleteBasket(username);
     }
 
     @PostMapping("/CheckoutV2")
