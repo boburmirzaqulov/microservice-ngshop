@@ -5,7 +5,6 @@ import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.TypeMapper;
 import io.ngshop.catalog.model.Type;
 import io.ngshop.catalog.repository.TypeRepository;
-import io.ngshop.catalog.service.CommonService;
 import io.ngshop.catalog.service.TypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

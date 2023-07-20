@@ -3,12 +3,21 @@ package io.ngshop.catalog.mapper;
 
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.model.Product;
-import io.ngshop.catalog.service.CommonService;
+import io.ngshop.catalog.repository.BrandRepository;
+import io.ngshop.catalog.repository.ProductRepository;
+import io.ngshop.catalog.repository.TypeRepository;
+import io.ngshop.catalog.service.Impl.CommonService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@RequiredArgsConstructor
 public class ProductMapper {
+    private final BrandRepository brandRepository;
+    private final TypeRepository typeRepository;
+
+
     public ProductDTO toDto(Product product){
         return product == null ? null : new ProductDTO(
                 product.getId() != null ? product.getId().toString() : null,
@@ -17,8 +26,8 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getSummary(),
                 product.getImageFile(),
-                product.getBrandId() != null ? product.getBrandId().toString() : null,
-                product.getTypeId() != null ? product.getTypeId().toString() : null
+                brandRepository.findById(product.getBrandId()).orElseThrow().getName(),
+                typeRepository.findById(product.getTypeId()).orElseThrow().getName()
         );
     }
     public Product toEntity(ProductDTO productDto){

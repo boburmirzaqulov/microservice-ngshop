@@ -1,4 +1,4 @@
-package io.ngshop.catalog.service;
+package io.ngshop.catalog.service.Impl;
 
 import io.ngshop.catalog.exception.WrongObjectIdException;
 import org.bson.types.ObjectId;

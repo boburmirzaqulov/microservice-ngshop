@@ -6,10 +6,8 @@ import io.ngshop.catalog.mapper.BrandMapper;
 import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.service.BrandService;
-import io.ngshop.catalog.service.CommonService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
