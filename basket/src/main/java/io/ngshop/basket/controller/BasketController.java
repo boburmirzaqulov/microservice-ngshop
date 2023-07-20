@@ -26,7 +26,7 @@ public class BasketController {
 
     }
 
-    @DeleteMapping("/DeleteBasket")
+    @DeleteMapping("/DeleteBasket{username}")
     public ResponseEntity<Void> deleteBasket(@PathVariable String username){
         return basketService.deleteBasket(username);
     }

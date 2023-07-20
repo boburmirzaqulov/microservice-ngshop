@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@FeignClient(name = "discount-service", url = "http://localhost:8081")
+@FeignClient(name = "discount-service")
 public interface DiscountClient {
     @RequestMapping(method = RequestMethod.GET, value = "/Discount/{productName}")
     DiscountDTO getDiscount(@PathVariable String productName);
