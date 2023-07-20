@@ -3,6 +3,7 @@ package io.ngshop.catalog.service.impl;
 import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.dto.TypeDto;
+import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.mapper.BrandMapper;
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.mapper.TypeMapper;
@@ -18,6 +19,7 @@ import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -95,6 +97,12 @@ public class CatalogServiceImpl implements CatalogService {
         }
         productRepository.deleteById(objectId);
         return true;
+    }
+
+    @Override
+    public ResponseEntity<ProductResponse> getAllProductsPagination(Optional<String> pageIndex, Optional<String> pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search) {
+        ProductResponse Pagination = productRepository.findAllWithPagination(pageIndex, pageSize, brandId, typeId, sort, search);
+        return ResponseEntity.ok(Pagination);
     }
 
 }

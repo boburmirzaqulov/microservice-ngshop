@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 public class BrandMapper {
     public BrandDto toDto(Brand brand){
         return brand == null ? null : new BrandDto(
-                brand.getId(),
+                brand.getId().toString(),
                 brand.getName()
         );
     }
     public Brand toEntity(BrandDto brandDto){
         return brandDto == null ? null : new Brand(
-                brandDto.getId(),
+                null,
                 brandDto.getName()
         );
     }

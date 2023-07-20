@@ -3,6 +3,7 @@ package io.ngshop.catalog.controller;
 import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.dto.ProductDto;
 import io.ngshop.catalog.dto.TypeDto;
+import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.service.CatalogService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -10,12 +11,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Catalog")
 @RequiredArgsConstructor
 public class CatalogController {
     private final CatalogService productService;
+    @GetMapping("/GetAllProducts")
+    public ResponseEntity<ProductResponse> getAllProduct(@RequestParam Optional<String> pageIndex,
+                                                         @RequestParam Optional<String> pageSize,
+                                                         @RequestParam Optional<String> brandId,
+                                                         @RequestParam Optional<String> typeId,
+                                                         @RequestParam Optional<String> sort,
+                                                         @RequestParam Optional<String> search){
+
+        return productService.getAllProductsPagination(pageIndex,pageSize,brandId,typeId,sort,search);
+    }
     @GetMapping("/GetProductById/{id}")
         public ResponseEntity<ProductDto> getProductById(@PathVariable String id){
             return productService.getProductById(new ObjectId(id));

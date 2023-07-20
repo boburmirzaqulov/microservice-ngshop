@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 public class TypeMapper {
     public TypeDto toDto(Type type){
         return type == null ? null : new TypeDto(
-                type.getId(),
+                type.getId().toString(),
                 type.getName()
         );
     }
     public Type toEntity(TypeDto typeDto){
         return typeDto == null ? null : new Type(
-                typeDto.getId(),
+                null,
                 typeDto.getName()
         );
     }
