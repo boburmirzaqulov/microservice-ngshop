@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "64b8b1481d3f2005a6aa378a"
+  },
+  "name": "iphone",
+  "_class": "io.ngshop.catalog.model.Brand"
+},
+{
+  "_id": {
+    "$oid": "64b8b14f1d3f2005a6aa378b"
+  },
+  "name": "samsung",
+  "_class": "io.ngshop.catalog.model.Brand"
+},
+{
+  "_id": {
+    "$oid": "64b8b1581d3f2005a6aa378c"
+  },
+  "name": "galaxy",
+  "_class": "io.ngshop.catalog.model.Brand"
+},
+{
+  "_id": {
+    "$oid": "64b8b15e1d3f2005a6aa378d"
+  },
+  "name": "redmi",
+  "_class": "io.ngshop.catalog.model.Brand"
+},
+{
+  "_id": {
+    "$oid": "64b8b15f1d3f2005a6aa378e"
+  },
+  "name": "redmi",
+  "_class": "io.ngshop.catalog.model.Brand"
+},
+{
+  "_id": {
+    "$oid": "64b8b53305108d56e65d9703"
+  },
+  "name": "Chevrolet",
+  "_class": "io.ngshop.catalog.model.Brand"
+},
+{
+  "_id": {
+    "$oid": "64b8b89715ef4815a802cc93"
+  },
+  "name": "exdale",
+  "_class": "io.ngshop.catalog.model.Brand"
+}]

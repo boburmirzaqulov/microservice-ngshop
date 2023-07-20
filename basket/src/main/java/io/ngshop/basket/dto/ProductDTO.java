@@ -1,20 +1,16 @@
-package io.ngshop.basket.Entity;
-
+package io.ngshop.basket.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class BasketDTO {
-
-    private String ProductId;
-    private Integer quantity;
+@Data
+public class ProductDTO {
+    private Long quantity;
     private String imageFile;
     private Double price;
+    private String productId;
     private String productName;
 }

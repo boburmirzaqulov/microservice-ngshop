@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO {
+    private Long id;
     private String userName;
     private Double totalPrice;
     private String firstName;
@@ -20,7 +21,7 @@ public class OrderDTO {
     private String cardName;
     private String cardNumber;
     private String expiration;
-    private String svv;
+    private String cvv;
     private Integer paymentMethod;
 
 }
