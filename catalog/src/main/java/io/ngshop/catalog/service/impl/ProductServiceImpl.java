@@ -1,4 +1,4 @@
-package io.ngshop.catalog.service.Impl;
+package io.ngshop.catalog.service.impl;
 
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.dto.response.ProductResponse;
