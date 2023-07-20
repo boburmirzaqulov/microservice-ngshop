@@ -23,7 +23,7 @@ public class ProductMapper {
     }
     public Product toEntity(ProductDTO productDto){
         return productDto == null ? null : new Product(
-                CommonService.checkObjectId(productDto.getBrandId()),
+                null,
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),

@@ -31,6 +31,7 @@ public class ProductExtensionImpl implements ProductExtension {
         Query query = new Query();
         brandId.ifPresent(value -> query.addCriteria(Criteria.where("brandId").is(CommonService.checkObjectId(value))));
         typeId.ifPresent(value -> query.addCriteria(Criteria.where("typeId").is(CommonService.checkObjectId(value))));
+        search.ifPresent(value -> query.addCriteria(Criteria.where("name").regex(value)));
         if (pageIndex.isPresent() && pageSize.isPresent()){
             if (!(pageIndex.get().equals("null") || pageSize.get().equals("null"))) {
                 query.with(PageRequest.of(Integer.parseInt(pageIndex.get())-1, Integer.parseInt(pageSize.get())));
@@ -40,9 +41,7 @@ public class ProductExtensionImpl implements ProductExtension {
             if (Set.of("name","id","price","description","summary","bradId","typeId").contains(s)) query.with(Sort.by(s));
         });
 
-        List<Product> products = mongoTemplate.find(query, Product.class);
-        System.out.println(products);
-        return products;
+        return mongoTemplate.find(query, Product.class);
 
     }
 
