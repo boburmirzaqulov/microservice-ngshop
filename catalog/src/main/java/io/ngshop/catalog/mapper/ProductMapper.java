@@ -2,6 +2,7 @@ package io.ngshop.catalog.mapper;
 
 
 import io.ngshop.catalog.dto.ProductDTO;
+import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.repository.ProductRepository;
@@ -26,8 +27,8 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getSummary(),
                 product.getImageFile(),
-                brandRepository.findById(product.getBrandId()).orElseThrow().getName(),
-                typeRepository.findById(product.getTypeId()).orElseThrow().getName()
+                brandRepository.findById(product.getBrandId()).orElseThrow(() -> new NotFoundException("Brand not found")).getName(),
+                typeRepository.findById(product.getTypeId()).orElseThrow(() -> new NotFoundException("Type not found")).getName()
         );
     }
     public Product toEntity(ProductDTO productDto){
