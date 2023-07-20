@@ -3,6 +3,7 @@ package io.ngshop.catalog.service.impl;
 import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.exception.NotFoundException;
+
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
@@ -22,13 +23,20 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public ResponseEntity<ProductDTO> getProductById(String id) {
-        ObjectId objectId = CommonService.checkObjectId(id);
-        Product product = productRepository.findById(objectId).orElseThrow(() -> new NotFoundException("Product not found"));
-        return ResponseEntity.ok(productMapper.toDto(product));
+    public ResponseEntity<ProductDto> create(ProductDto productDto) {
+        Product product = productMapper.toEntity(productDto);
+        Product save = productRepository.save(product);
+        return ResponseEntity.ok(productMapper.toDto(save));
+    }
+
+    public ResponseEntity<List<ProductDto>> getProducts() {
+        List<Product> all = productRepository.findAll();
+        List<ProductDto> list = all.stream().map(productMapper::toDto).toList();
+        return ResponseEntity.ok(list);
     }
 
     @Override
+
     public ResponseEntity<ProductResponse> getByName(String productName) {
         List<Product> products = productRepository.findByName(productName);
         return ResponseEntity.ok(ProductResponse.builder().data(products.stream().map(productMapper::toDto).toList()).count(products.size()).build());

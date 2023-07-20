@@ -1,47 +1,32 @@
 package io.ngshop.discount.controller;
 
-import io.ngshop.discount.dto.DiscountDto;
-import io.ngshop.discount.service.DiscountService;
+import io.ngshop.discount.dto.CouponDto;
+import io.ngshop.discount.service.CouponService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/discounts")
-@Slf4j
+@RequestMapping("/Discount")
 @RequiredArgsConstructor
 public class DiscountController {
-    private final DiscountService discountService;
-
-    @GetMapping("/{id}")
-    public ResponseEntity<DiscountDto> getDiscountById(@PathVariable Long id){
-        return discountService.getDiscountById(id);
+    private final CouponService couponService;
+    @GetMapping("/{productName}")
+    public ResponseEntity<CouponDto> getDiscountByProduct(@PathVariable String productName){
+        return couponService.getCouponByProductName(productName);
+    }
+    @PostMapping()
+    public ResponseEntity<CouponDto> createCoupon(@RequestBody CouponDto couponDto){
+        return couponService.createCoupon(couponDto);
     }
 
-
-    @GetMapping
-    public ResponseEntity<List<DiscountDto>> getAllDiscount(@RequestParam Optional<Integer> offset, @RequestParam Optional<Integer> limit){
-        return discountService.getAllDiscount(offset,limit);
+    @PutMapping()
+    public ResponseEntity<CouponDto> updateCoupon(@RequestBody CouponDto couponDto){
+        return couponService.updateCoupon(couponDto);
     }
 
-    @PostMapping
-    public ResponseEntity<DiscountDto> saveDiscount(@RequestBody DiscountDto discountDto){
-        return discountService.saveDiscount(discountDto);
+    @DeleteMapping("/{productName}")
+    public ResponseEntity<CouponDto> deleteCoupon(@PathVariable String productName){
+        return couponService.deleteCoupon(productName);
     }
-
-    @PutMapping
-    public ResponseEntity<DiscountDto> updateDiscount(@RequestBody DiscountDto discountDto){
-        return discountService.updateDiscount(discountDto);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteDiscount(@PathVariable Long id){
-        discountService.deleteDiscount(id);
-    }
-
 }

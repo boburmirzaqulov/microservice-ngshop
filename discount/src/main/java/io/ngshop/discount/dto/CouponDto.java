@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class DiscountDto {
+@NoArgsConstructor
+public class CouponDto {
     private Long id;
     private String productName;
-    private Double percent;
-    private String Description;
+    private String description;
+    private Double amount;
 }
