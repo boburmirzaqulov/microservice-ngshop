@@ -21,7 +21,7 @@ public class OrderDTO {
     private String cardName;
     private String cardNumber;
     private String expiration;
-    private String svv;
+    private String cvv;
     private Integer paymentMethod;
 
 }
