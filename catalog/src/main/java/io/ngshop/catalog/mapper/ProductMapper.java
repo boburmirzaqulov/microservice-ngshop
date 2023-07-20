@@ -30,7 +30,7 @@ public class ProductMapper {
                 typeRepository.findById(product.getTypeId()).orElseThrow(() -> new NotFoundException("Type not found")).getName()
         );
     }
-    public Product toEntity(ProductDTO productDto){
+    public Product toEntity(ProductDto productDto){
         return productDto == null ? null : new Product(
                 null,
 

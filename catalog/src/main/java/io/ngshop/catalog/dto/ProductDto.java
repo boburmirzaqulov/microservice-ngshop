@@ -18,5 +18,4 @@ public class ProductDto {
     private String imageFile;
     private String brandId;
     private String typeId;
-
 }

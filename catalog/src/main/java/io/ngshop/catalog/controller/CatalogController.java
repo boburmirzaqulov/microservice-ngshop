@@ -9,12 +9,12 @@ import io.ngshop.catalog.service.BrandService;
 import io.ngshop.catalog.service.ProductService;
 import io.ngshop.catalog.service.TypeService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/Catalog")
