@@ -61,7 +61,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(Long id) {
-        orderRepository.deleteById(id);
+    public ResponseEntity<Void> deleteOrder(Long id) {
+        try {
+            orderRepository.deleteById(id);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().build();
     }
 }
