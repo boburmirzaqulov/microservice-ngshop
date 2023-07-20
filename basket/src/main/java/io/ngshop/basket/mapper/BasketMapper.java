@@ -1,6 +1,6 @@
 package io.ngshop.basket.mapper;
 
-import io.ngshop.basket.dto.BasketDTO;
+import io.ngshop.basket.dto.response.BasketResponse;
 import io.ngshop.basket.model.Basket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,11 +9,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BasketMapper {
 
-    public Basket toEntity(){
-        return null;
+    public Basket toEntity(BasketResponse basketResponse){
+        return new Basket(
+                null,
+                basketResponse.getUserName(),
+                basketResponse.getItems(),
+                basketResponse.getTotalPrice()
+        );
     }
-    public BasketDTO toDto(Basket basket){
-        return null;
+    public BasketResponse toDto(Basket basket){
+        return new BasketResponse(
+                basket.getUsername(),
+                basket.getItems(),
+                basket.getTotalPrice()
+        );
     }
 
 
