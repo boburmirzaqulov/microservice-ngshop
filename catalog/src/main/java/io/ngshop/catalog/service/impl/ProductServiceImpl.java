@@ -47,9 +47,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<ProductDTO> create(ProductDTO productDto) {
-        productDto.setName(productDto.getName().toLowerCase());
-        Product product = productMapper.toEntity(productDto);
+    public ResponseEntity<ProductDTO> create(ProductDTO productDTO) {
+        productDTO.setName(productDTO.getName().toLowerCase());
+        Product product = productMapper.toEntity(productDTO);
         Product save = productRepository.save(product);
         return ResponseEntity.ok(productMapper.toDto(save));
     }
