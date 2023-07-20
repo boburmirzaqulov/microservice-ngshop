@@ -8,7 +8,6 @@ import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
 import io.ngshop.catalog.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +20,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    @Override
-    public ResponseEntity<ProductDto> create(ProductDto productDto) {
-        Product product = productMapper.toEntity(productDto);
-        Product save = productRepository.save(product);
-        return ResponseEntity.ok(productMapper.toDto(save));
-    }
-
-    public ResponseEntity<List<ProductDto>> getProducts() {
-        List<Product> all = productRepository.findAll();
-        List<ProductDto> list = all.stream().map(productMapper::toDto).toList();
-        return ResponseEntity.ok(list);
-    }
 
     @Override
     public ResponseEntity<ProductResponse> getByName(String productName) {
@@ -50,6 +37,12 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<ProductResponse> getProductByBrandName(String brand) {
         List<Product> products = productRepository.findByBrandName(brand);
         return ResponseEntity.ok(ProductResponse.builder().data(products.stream().map(productMapper::toDto).toList()).count(products.size()).build());
+    }
+
+    @Override
+    public ResponseEntity<ProductDTO> getProductById(String id) {
+        Product product = productRepository.findById(CommonService.checkObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
+        return ResponseEntity.ok(productMapper.toDto(product));
     }
 
     @Override
@@ -74,10 +67,5 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(CommonService.checkObjectId(id)).orElseThrow(() -> new NotFoundException("Product not found"));
         productRepository.delete(product);
         return ResponseEntity.ok().build();
-    }
-
-    @Override
-    public ResponseEntity<List<ProductDto>> getAllProducts() {
-        return null;
     }
 }

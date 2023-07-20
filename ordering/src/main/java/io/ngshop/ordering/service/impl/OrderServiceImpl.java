@@ -3,6 +3,7 @@ package io.ngshop.ordering.service.impl;
 
 
 import io.ngshop.ordering.dto.OrderDTO;
+import io.ngshop.ordering.exception.NotFoundException;
 import io.ngshop.ordering.mapper.OrderMapper;
 import io.ngshop.ordering.model.Order;
 import io.ngshop.ordering.repository.OrderRepository;
@@ -19,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseEntity<OrderDTO> getOrderByUsername(String username) {
         Order order = orderRepository.findByUsername(username);
         if(order == null){
-            throw new RuntimeException("order not found");
+            throw new NotFoundException("order not found");
         }
         return ResponseEntity.ok(orderMapper.toDTO(order));
     }
@@ -29,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseEntity<OrderDTO> addOrder(OrderDTO orderDTO) {
         Order order = orderMapper.toEntity(orderDTO);
         if (order == null){
-            throw new RuntimeException("order not found");
+            throw new NotFoundException("order not found");
         }
         Order save = orderRepository.save(order);
         return ResponseEntity.ok(orderMapper.toDTO(save));
@@ -39,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseEntity<OrderDTO> updateOrder(OrderDTO orderDTO) {
         Order order = orderMapper.toEntity(orderDTO);
         if (order == null){
-            throw new RuntimeException("order not found");
+            throw new NotFoundException("order not found");
         }
         Order byUsername = orderRepository.findByUsername(order.getUsername());
 //        byUsername.setId(order.getId());
@@ -64,8 +65,8 @@ public class OrderServiceImpl implements OrderService {
     public ResponseEntity<Void> deleteOrder(Long id) {
         try {
             orderRepository.deleteById(id);
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (NotFoundException ex){
+            ex.getMessage();
         }
         return ResponseEntity.ok().build();
     }
