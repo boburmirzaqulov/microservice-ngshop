@@ -10,5 +10,5 @@ public interface OrderService {
 
     ResponseEntity<OrderDTO> updateOrder(OrderDTO orderDTO);
 
-    void deleteOrder(Long id);
+    ResponseEntity<Void> deleteOrder(Long id);
 }

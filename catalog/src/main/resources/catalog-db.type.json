@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "64b8b2b105108d56e65d9700"
+  },
+  "name": "Telefon",
+  "_class": "io.ngshop.catalog.model.Type"
+},
+{
+  "_id": {
+    "$oid": "64b8b2b805108d56e65d9701"
+  },
+  "name": "Mashina",
+  "_class": "io.ngshop.catalog.model.Type"
+},
+{
+  "_id": {
+    "$oid": "64b8b2cf05108d56e65d9702"
+  },
+  "name": "Kiyim-kechak",
+  "_class": "io.ngshop.catalog.model.Type"
+}]

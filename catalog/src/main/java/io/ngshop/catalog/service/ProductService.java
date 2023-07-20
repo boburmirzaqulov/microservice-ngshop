@@ -1,21 +1,25 @@
 package io.ngshop.catalog.service;
 
 import io.ngshop.catalog.dto.ProductDTO;
-import org.bson.types.ObjectId;
+import io.ngshop.catalog.dto.response.ProductResponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
 
+    ResponseEntity<ProductDto> getProductById(String id);
 
-    ResponseEntity<ProductDTO> getProductById(ObjectId id);
+    ResponseEntity<ProductDto> create(ProductDto productDTO);
 
-    ResponseEntity<ProductDTO> createProduct(ProductDTO productDTO);
+    ResponseEntity<ProductDto> update(ProductDto productDTO, String productId);
 
-    ResponseEntity<ProductDTO> updateProduct(ProductDTO productDTO);
+    ResponseEntity<Void> delete(String id);
+    ResponseEntity<ProductResponse> getByName(String productName);
 
-    ResponseEntity<Void> deleteProduct(Long id);
+    ResponseEntity<ProductResponse> getAllProducts(Optional<String> pageIndex, Optional<String> pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search);
 
-    ResponseEntity<List<ProductDTO>> getAllProducts();
+    ResponseEntity<ProductResponse> getProductByBrandName(String brand);
+
 }
