@@ -1,4 +1,4 @@
-package io.ngshop.catalog.service.Impl;
+package io.ngshop.catalog.service.impl;
 
 import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.exception.NotFoundException;

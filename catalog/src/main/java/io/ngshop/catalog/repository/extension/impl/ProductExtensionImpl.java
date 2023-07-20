@@ -8,7 +8,7 @@ import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.repository.extension.ProductExtension;
-import io.ngshop.catalog.service.Impl.CommonService;
+import io.ngshop.catalog.service.impl.CommonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
