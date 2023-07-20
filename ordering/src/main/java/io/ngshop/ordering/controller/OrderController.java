@@ -23,7 +23,7 @@ public class OrderController {
         return orderService.addOrder(orderDTO);
     }
 
-    @PostMapping("/Order")
+    @PutMapping("/Order")
     public ResponseEntity<OrderDTO> updateOrder(@RequestBody OrderDTO orderDTO){
         return orderService.updateOrder(orderDTO);
     }
