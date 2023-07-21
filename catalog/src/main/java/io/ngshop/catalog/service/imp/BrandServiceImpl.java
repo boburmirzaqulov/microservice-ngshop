@@ -1,10 +1,8 @@
-package io.ngshop.catalog.service.impl;
+package io.ngshop.catalog.service.imp;
 
 import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.exception.NotFoundException;
-import io.ngshop.catalog.exception.WrongObjectIdException;
 import io.ngshop.catalog.mapper.BrandMapper;
-import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.service.BrandService;

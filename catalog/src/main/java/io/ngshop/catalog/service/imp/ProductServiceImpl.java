@@ -1,6 +1,8 @@
-package io.ngshop.catalog.service.impl;
+package io.ngshop.catalog.service.imp;
 
 import io.ngshop.catalog.dto.ProductDto;
+import io.ngshop.catalog.dto.ProductResponse;
+import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.mapper.ProductMapper;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
@@ -34,7 +36,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseEntity<ProductDto> getProductById(String id) {
-        return null;
+        ObjectId objectId = CommonService.checkObjectId(id);
+        Product product = productRepository.findById(objectId).orElseThrow(() -> new NotFoundException("Product not found"));
+        return ResponseEntity.ok(productMapper.toDto(product));
     }
 
     @Override
@@ -53,8 +57,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<List<ProductDto>> getAllProducts(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search) {
-        return null;
+    public ResponseEntity<ProductResponse> getAllProducts(Integer pageIndex, Integer pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search) {
+        return productRepository.findAllWithPagination(pageIndex,pageSize,brandId,typeId,sort,search);
     }
 
     @Override

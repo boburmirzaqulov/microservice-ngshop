@@ -1,6 +1,7 @@
 package io.ngshop.catalog.service;
 
 import io.ngshop.catalog.dto.ProductDto;
+import io.ngshop.catalog.dto.ProductResponse;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 
@@ -18,7 +19,7 @@ public interface ProductService {
     ResponseEntity<ProductDto> delete(String id);
     ResponseEntity<List<ProductDto>> getByName(String productName);
 
-    ResponseEntity<List<ProductDto>> getAllProducts(Optional<Integer> pageIndex, Optional<Integer> pageSize, Optional<ObjectId> brandId, Optional<ObjectId> typeId, Optional<String> sort, Optional<String> search);
+    ResponseEntity<ProductResponse> getAllProducts(Integer pageIndex, Integer pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search);
 
     ResponseEntity<List<ProductDto>> getProductByBrandName(String brand);
 }

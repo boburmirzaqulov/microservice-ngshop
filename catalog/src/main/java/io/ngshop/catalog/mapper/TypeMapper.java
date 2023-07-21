@@ -1,10 +1,8 @@
 package io.ngshop.catalog.mapper;
 
-import io.ngshop.catalog.dto.BrandDto;
 import io.ngshop.catalog.dto.TypeDto;
-import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Type;
-import io.ngshop.catalog.service.impl.CommonService;
+import io.ngshop.catalog.service.imp.CommonService;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 

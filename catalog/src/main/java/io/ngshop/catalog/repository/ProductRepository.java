@@ -13,5 +13,4 @@ public interface ProductRepository extends MongoRepository<Product, ObjectId>, P
     List<Product> findByName(String name);
     List<Product> findByBrandId(ObjectId id);
 
-
 }
