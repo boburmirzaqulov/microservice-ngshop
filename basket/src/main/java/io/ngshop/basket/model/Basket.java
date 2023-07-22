@@ -11,7 +11,9 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class Basket {
    @Id
    private ObjectId objectId;
    private String username;
-   private List<ProductDTO> items;
+   private Set<ProductDTO> items;
    private Double totalPrice;
 
 }

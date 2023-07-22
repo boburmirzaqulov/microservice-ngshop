@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +16,6 @@ import java.util.List;
 @Builder
 public class BasketResponse {
     private String userName;
-    private List<ProductDTO> Items;
+    private Set<ProductDTO> Items;
     private Double totalPrice;
 }

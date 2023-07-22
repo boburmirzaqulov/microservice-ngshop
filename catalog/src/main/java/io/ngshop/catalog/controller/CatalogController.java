@@ -19,37 +19,41 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/Catalog")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class CatalogController {
     private final ProductService productService;
     private final TypeService typeService;
     private final BrandService brandService;
 
 
+    @GetMapping("/test")
+    public String working() {
+        return "Hello World";
+    }
 
-    @GetMapping("GetAllBrands")
-    public ResponseEntity<List<BrandDTO>> getAllBrands(){
+    @GetMapping("/GetAllBrands")
+    public ResponseEntity<List<BrandDTO>> getAllBrands() {
         return brandService.findAll();
     }
 
-    @GetMapping("GetAllTypes")
-    public ResponseEntity<List<TypeDTO>> getAllTypes(){
+    @GetMapping("/GetAllTypes")
+    public ResponseEntity<List<TypeDTO>> getAllTypes() {
         return typeService.findAll();
     }
 
     @GetMapping("/GetProductById/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable String id){
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable String id) {
         return productService.getProductById(id);
     }
 
 
     @GetMapping("/GetProductByProductName/{productName}")
-    public ResponseEntity<ProductResponse> getProductByProductName(@PathVariable String productName){
+    public ResponseEntity<ProductResponse> getProductByProductName(@PathVariable String productName) {
         return productService.getByName(productName);
     }
 
     @GetMapping("/GetProductsByBrandName/{brand}")
-    public ResponseEntity<ProductResponse> getProductByBrandName(@PathVariable String brand){
+    public ResponseEntity<ProductResponse> getProductByBrandName(@PathVariable String brand) {
         return productService.getProductByBrandName(brand);
     }
 
@@ -59,24 +63,23 @@ public class CatalogController {
                                                          @RequestParam Optional<String> brandId,
                                                          @RequestParam Optional<String> typeId,
                                                          @RequestParam Optional<String> sort,
-                                                         @RequestParam Optional<String> search){
+                                                         @RequestParam Optional<String> search) {
 
-        return productService.getAllProducts(pageIndex,pageSize,brandId,typeId,sort,search);
+        return productService.getAllProducts(pageIndex, pageSize, brandId, typeId, sort, search);
     }
 
     @PostMapping("/CreateProduct")
-    public ResponseEntity<ProductDto> create(@RequestBody ProductDto productDTO){
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO) {
         return productService.create(productDTO);
     }
 
     @PutMapping("/UpdateProduct/{productId}")
-    public ResponseEntity<ProductDto> update(@RequestBody ProductDto productDTO, @PathVariable String productId){
-        return productService.update(productDTO,productId);
+    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO, @PathVariable String productId) {
+        return productService.update(productDTO, productId);
     }
 
     @DeleteMapping("/{id}/DeleteProduct")
-
-    public ResponseEntity<Void> delete(@PathVariable String id){
+    public ResponseEntity<Void> delete(@PathVariable String id) {
         return productService.delete(id);
     }
 }
