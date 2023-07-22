@@ -8,6 +8,7 @@ import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
 import io.ngshop.catalog.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,6 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-
 
     @Override
     public ResponseEntity<ProductResponse> getByName(String productName) {
@@ -46,18 +46,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<ProductDTO> create(ProductDTO productDTO) {
-        productDTO.setName(productDTO.getName().toLowerCase());
-        Product product = productMapper.toEntity(productDTO);
+    public ResponseEntity<ProductDTO> create(ProductDTO ProductDTO) {
+        ProductDTO.setName(ProductDTO.getName().toLowerCase());
+        Product product = productMapper.toEntity(ProductDTO);
         Product save = productRepository.save(product);
         return ResponseEntity.ok(productMapper.toDto(save));
     }
 
     @Override
-    public ResponseEntity<ProductDTO> update(ProductDTO productDTO, String productId) {
-        productDTO.setName(productDTO.getName().toLowerCase());
+    public ResponseEntity<ProductDTO> update(ProductDTO ProductDTO, String productId) {
+        ProductDTO.setName(ProductDTO.getName().toLowerCase());
         productRepository.findById(CommonService.checkObjectId(productId)).orElseThrow(() -> new NotFoundException("Product not found"));
-        Product entity = productMapper.toEntity(productDTO);
+        Product entity = productMapper.toEntity(ProductDTO);
         Product save = productRepository.save(entity);
         return ResponseEntity.ok(productMapper.toDto(save));
     }
@@ -68,4 +68,5 @@ public class ProductServiceImpl implements ProductService {
         productRepository.delete(product);
         return ResponseEntity.ok().build();
     }
+
 }

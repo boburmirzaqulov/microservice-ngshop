@@ -26,7 +26,7 @@ public class RouteConfig {
                             log.info("Headers: {}", header);
                             return chain.filter(exchange);
                         }))
-                        .uri("http://localhost:8081"))
+                        .uri("http://localhost:9010"))
                 .route(r -> r.path("/Catalog/**")
 //                        .filters(f -> f.filter(new GatewayFilter() {
 //                            @Override
@@ -35,8 +35,12 @@ public class RouteConfig {
 //                                return null;
 //                            }
 //                        }))
-                        .uri("localhost:8085"))
+                        .uri("http://localhost:8081"))
                 //localhost:8089/Basket/feign -> localhost:8081/Basket/feign
                 .build();
     }
+    /**
+     * localhost:8080/Basket/** -> localhost:9010/Basket/**
+     * localhost:8080/Basket/** -> localhost:8081/Basket/**
+     */
 }
