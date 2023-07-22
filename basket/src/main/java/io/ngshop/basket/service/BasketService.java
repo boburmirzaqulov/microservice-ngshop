@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 public interface BasketService {
 
 
-    ResponseEntity<BasketResponse> getBasketByUsername(String username);
+    ResponseEntity<BasketDTO> getBasketByUsername(String username);
 
     ResponseEntity<BasketDTO> createBasket(BasketDTO basketDTO);
 

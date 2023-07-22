@@ -1,16 +1,15 @@
 package io.ngshop.basket.clients;
 
-import io.ngshop.basket.dto.ProductDTO;
-import io.ngshop.basket.dto.serverDTO.ProductDtoCatalog;
+import io.ngshop.basket.dto.DiscountDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(url = "http://localhost:8080/Product")
+@FeignClient(name = "discount-service",url = "http://localhost:8081")
 @Component
-public interface ProductClient {
-    @RequestMapping(method = RequestMethod.GET, value = "/GetProductById/{productId}")
-    ProductDtoCatalog getProductsById(@PathVariable String productId);
+public interface DiscountClient {
+    @RequestMapping(method = RequestMethod.GET, value = "/Discount/{productName}")
+    DiscountDto getProductByName(@PathVariable String productName);
 }

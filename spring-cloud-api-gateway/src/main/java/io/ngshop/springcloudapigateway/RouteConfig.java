@@ -18,6 +18,6 @@ public class RouteConfig {
                         .route(route -> route.path("/api/Order/**")
                                 .uri("http://localhost:9003"))
                 .build();
-
     }
+
 }

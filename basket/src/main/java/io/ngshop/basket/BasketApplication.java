@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import java.util.Arrays;
 
 @SpringBootApplication
-@EnableFeignClients(value = "discount-service")
+@EnableFeignClients
 public class BasketApplication {
 
 	public static void main(String[] args) {

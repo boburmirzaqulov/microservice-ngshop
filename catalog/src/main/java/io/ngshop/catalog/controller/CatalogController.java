@@ -19,7 +19,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/Catalog")
 @RequiredArgsConstructor
-@CrossOrigin(value = "http://localhost:4200")
 public class CatalogController {
     private final ProductService productService;
     private final TypeService typeService;

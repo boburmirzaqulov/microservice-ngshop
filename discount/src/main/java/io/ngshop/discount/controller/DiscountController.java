@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/Discount")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DiscountController {
     private final CouponService couponService;
     @GetMapping("/{productName}")
