@@ -1,6 +1,5 @@
 package io.ngshop.basket.service.impl;
 
-import feign.FeignException;
 import io.ngshop.basket.clients.DiscountClient;
 import io.ngshop.basket.customexception.NoResourceFoundException;
 import io.ngshop.basket.dto.BasketV2DTO;
@@ -12,13 +11,16 @@ import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.repository.BasketRepository;
 import io.ngshop.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final BasketMapper basketMapper;
@@ -34,29 +36,42 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
-    public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) throws FeignException {
-
-
-
-        for (ProductDTO productDTO : basketResponse.getItems()) {
-            String productName = productDTO.getProductName();
-            try {
+    public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) {
+        Basket finalBasket;
+        Optional<Basket> existingBasket = basketRepository.findByUsername(basketResponse.getUserName());
+        if (existingBasket.isPresent()) {
+            Set<ProductDTO> existingItems = existingBasket.get().getItems();
+            for (ProductDTO productDTO : basketResponse.getItems()) {
+                if (!existingItems.contains(productDTO)) {
+                    String productName = productDTO.getProductName();
+                    DiscountDTO discountDTO = discountClient.getDiscount(productName);
+                    Double amount = discountDTO.getAmount();
+                    productDTO.setPrice(productDTO.getPrice() - amount);
+                } else {
+                    existingItems.remove(productDTO);
+                }
+            }
+            existingBasket.get().getItems().addAll(basketResponse.getItems());
+            finalBasket = existingBasket.get();
+        } else {
+            for (ProductDTO productDTO : basketResponse.getItems()) {
+                String productName = productDTO.getProductName();
                 DiscountDTO discountDTO = discountClient.getDiscount(productName);
                 Double amount = discountDTO.getAmount();
                 productDTO.setPrice(productDTO.getPrice() - amount);
-            } catch (FeignException e) {
-
-                if(e.status()!=404) throw new NoResourceFoundException();
-
             }
+            finalBasket = basketMapper.toEntity(basketResponse);
         }
 
 
 
+        String username = basketResponse.getUserName();
 
-        Basket basket = basketMapper.toEntity(basketResponse);
-        Basket save = basketRepository.save(basket);
+        if (username != null) {
 
+
+        }
+        Basket save = basketRepository.save(finalBasket);
         return ResponseEntity.ok(basketMapper.toDto(save));
     }
 
