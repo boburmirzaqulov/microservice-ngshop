@@ -1,4 +1,4 @@
-package io.ngshop.basket.dto;
+package io.ngshoop.userservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BasketV2DTO {
-
-    private String username;
-    private Double totalPrice;
+public class ErrorDto {
+    private String error;
 }
-

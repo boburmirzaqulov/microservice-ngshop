@@ -2,7 +2,7 @@ package io.ngshop.basket.service.impl;
 
 import io.ngshop.basket.clients.DiscountClient;
 import io.ngshop.basket.customexception.NoResourceFoundException;
-import io.ngshop.basket.dto.BasketV2DTO;
+import io.ngshop.basket.dto.BasketCheckout;
 import io.ngshop.basket.dto.DiscountDTO;
 import io.ngshop.basket.dto.ProductDTO;
 import io.ngshop.basket.dto.response.BasketResponse;
@@ -11,11 +11,10 @@ import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.repository.BasketRepository;
 import io.ngshop.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,6 +24,7 @@ public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final BasketMapper basketMapper;
     private final DiscountClient discountClient;
+    private final AmqpTemplate amqpTemplate;
 
     @Override
     public ResponseEntity<BasketResponse> getBasketByUsername(String username) {
@@ -63,21 +63,16 @@ public class BasketServiceImpl implements BasketService {
             finalBasket = basketMapper.toEntity(basketResponse);
         }
 
-
-
-        String username = basketResponse.getUserName();
-
-        if (username != null) {
-
-
-        }
         Basket save = basketRepository.save(finalBasket);
         return ResponseEntity.ok(basketMapper.toDto(save));
     }
 
     @Override
-    public ResponseEntity<Basket> checkoutBasket(BasketV2DTO basketV2DTO) {
-        return null;
+    public ResponseEntity<BasketResponse> checkoutBasket(BasketResponse basketResponse) {
+        BasketCheckout basketCheckout = basketMapper.toCheckout(basketResponse);
+        amqpTemplate.convertAndSend(basketCheckout);
+
+        return ResponseEntity.ok(basketResponse);
     }
 
     @Override
