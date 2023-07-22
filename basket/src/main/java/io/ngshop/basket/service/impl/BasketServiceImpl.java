@@ -14,6 +14,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class BasketServiceImpl implements BasketService {
@@ -32,27 +37,41 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) {
-
-
-
-        for (ProductDTO productDTO: basketResponse.getItems()) {
-            String productName = productDTO.getProductName();
-            DiscountDTO discountDTO = discountClient.getDiscount(productName);
-            Double amount = discountDTO.getAmount();
-            productDTO.setPrice(productDTO.getPrice()-amount);
+        Basket finalBasket;
+        Optional<Basket> existingBasket = basketRepository.findByUsername(basketResponse.getUserName());
+        if (existingBasket.isPresent()) {
+            Set<ProductDTO> existingItems = existingBasket.get().getItems();
+            for (ProductDTO productDTO : basketResponse.getItems()) {
+                if (!existingItems.contains(productDTO)) {
+                    String productName = productDTO.getProductName();
+                    DiscountDTO discountDTO = discountClient.getDiscount(productName);
+                    Double amount = discountDTO.getAmount();
+                    productDTO.setPrice(productDTO.getPrice() - amount);
+                } else {
+                    existingItems.remove(productDTO);
+                }
+            }
+            existingBasket.get().getItems().addAll(basketResponse.getItems());
+            finalBasket = existingBasket.get();
+        } else {
+            for (ProductDTO productDTO : basketResponse.getItems()) {
+                String productName = productDTO.getProductName();
+                DiscountDTO discountDTO = discountClient.getDiscount(productName);
+                Double amount = discountDTO.getAmount();
+                productDTO.setPrice(productDTO.getPrice() - amount);
+            }
+            finalBasket = basketMapper.toEntity(basketResponse);
         }
+
+
 
         String username = basketResponse.getUserName();
 
-        if (username != null){
+        if (username != null) {
 
 
         }
-
-
-        Basket basket = basketMapper.toEntity(basketResponse);
-        Basket save = basketRepository.save(basket);
-
+        Basket save = basketRepository.save(finalBasket);
         return ResponseEntity.ok(basketMapper.toDto(save));
     }
 
