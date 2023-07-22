@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("Basket")
+@CrossOrigin(origins = "*")
 public class BasketController {
 
     @Autowired

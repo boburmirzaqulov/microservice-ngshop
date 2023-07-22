@@ -1,5 +1,6 @@
 package io.ngshop.basket.service.impl;
 
+import feign.FeignException;
 import io.ngshop.basket.clients.DiscountClient;
 import io.ngshop.basket.customexception.NoResourceFoundException;
 import io.ngshop.basket.dto.BasketV2DTO;
@@ -11,11 +12,13 @@ import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.repository.BasketRepository;
 import io.ngshop.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final BasketMapper basketMapper;
@@ -31,23 +34,24 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
-    public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) {
+    public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) throws FeignException {
 
 
 
-        for (ProductDTO productDTO: basketResponse.getItems()) {
+        for (ProductDTO productDTO : basketResponse.getItems()) {
             String productName = productDTO.getProductName();
-            DiscountDTO discountDTO = discountClient.getDiscount(productName);
-            Double amount = discountDTO.getAmount();
-            productDTO.setPrice(productDTO.getPrice()-amount);
+            try {
+                DiscountDTO discountDTO = discountClient.getDiscount(productName);
+                Double amount = discountDTO.getAmount();
+                productDTO.setPrice(productDTO.getPrice() - amount);
+            } catch (FeignException e) {
+
+                if(e.status()!=404) throw new NoResourceFoundException();
+
+            }
         }
 
-        String username = basketResponse.getUserName();
 
-        if (username != null){
-
-
-        }
 
 
         Basket basket = basketMapper.toEntity(basketResponse);

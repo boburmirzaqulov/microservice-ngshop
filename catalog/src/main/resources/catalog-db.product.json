@@ -1,289 +1,291 @@
+
 [{
-  "_id": {
-    "$oid": "64b8b1481d3f2005a6aa378a"
-  },
-  "name": "Iphone 13",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 1000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b1481d3f2005a6aa378a"
-  },
-  "typeId": {
-    "$oid": "64b8b2b105108d56e65d9700"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b1481d3f2005a6aa378a"
+},
+"name": "Iphone 13",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 1000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b1481d3f2005a6aa378a"
+},
+"typeId": {
+"$oid": "64b8b2b105108d56e65d9700"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "name": "nexia - 2",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 25000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"name": "nexia - 2",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 25000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b7c015ef4815a802cc8d"
-  },
-  "name": "malibu - 2",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 25000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b7c015ef4815a802cc8d"
+},
+"name": "malibu - 2",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 25000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b7cb15ef4815a802cc8e"
-  },
-  "name": "damas",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 5000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b7cb15ef4815a802cc8e"
+},
+"name": "damas",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 5000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b7d715ef4815a802cc8f"
-  },
-  "name": "Cobalt",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 10000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b7d715ef4815a802cc8f"
+},
+"name": "Cobalt",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 10000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b83415ef4815a802cc90"
-  },
-  "name": "Redmi note 7",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 10000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b105108d56e65d9700"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b83415ef4815a802cc90"
+},
+"name": "Redmi note 7",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 10000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b105108d56e65d9700"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b84c15ef4815a802cc91"
-  },
-  "name": "Redmi note 8",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 200,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b105108d56e65d9700"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b84c15ef4815a802cc91"
+},
+"name": "Redmi note 8",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 200,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b105108d56e65d9700"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b85815ef4815a802cc92"
-  },
-  "name": "Redmi 10",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 400,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b105108d56e65d9700"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b85815ef4815a802cc92"
+},
+"name": "Redmi 10",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 400,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b105108d56e65d9700"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b8a715ef4815a802cc94"
-  },
-  "name": "Fudbolka",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 7,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b89715ef4815a802cc93"
-  },
-  "typeId": {
-    "$oid": "64b8b2cf05108d56e65d9702"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b8a715ef4815a802cc94"
+},
+"name": "Fudbolka",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 7,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b89715ef4815a802cc93"
+},
+"typeId": {
+"$oid": "64b8b2cf05108d56e65d9702"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b8b815ef4815a802cc95"
-  },
-  "name": "Tufli",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 16,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b89715ef4815a802cc93"
-  },
-  "typeId": {
-    "$oid": "64b8b2cf05108d56e65d9702"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+
+"$oid": "64b8b8b815ef4815a802cc95"
+},
+"name": "Tufli",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 16,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b89715ef4815a802cc93"
+},
+"typeId": {
+"$oid": "64b8b2cf05108d56e65d9702"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8b8c115ef4815a802cc96"
-  },
-  "name": "Paypoq",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 1,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b89715ef4815a802cc93"
-  },
-  "typeId": {
-    "$oid": "64b8b2cf05108d56e65d9702"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8b8c115ef4815a802cc96"
+},
+"name": "Paypoq",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 1,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b89715ef4815a802cc93"
+},
+"typeId": {
+"$oid": "64b8b2cf05108d56e65d9702"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8dac19e035c153ae2ee2f"
-  },
-  "name": "spark - 2",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 6010,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8dac19e035c153ae2ee2f"
+},
+"name": "spark - 2",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 6010,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8dacd9e035c153ae2ee30"
-  },
-  "name": "tiko",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 1010,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8dacd9e035c153ae2ee30"
+},
+"name": "tiko",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 1010,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8dadc9e035c153ae2ee31"
-  },
-  "name": "Jiguli",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 1000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8dadc9e035c153ae2ee31"
+},
+"name": "Jiguli",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 1000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8dae39e035c153ae2ee32"
-  },
-  "name": "a-Jiguli",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 1000,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8dae39e035c153ae2ee32"
+},
+"name": "a-Jiguli",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 1000,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8daea9e035c153ae2ee33"
-  },
-  "name": "b-Jiguli",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 1100,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8daea9e035c153ae2ee33"
+},
+"name": "b-Jiguli",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 1100,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 },
 {
-  "_id": {
-    "$oid": "64b8daf19e035c153ae2ee34"
-  },
-  "name": "d-Jiguli",
-  "description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
-  "price": 900,
-  "summary": "Indoor Badminton Shoes",
-  "imageFile": "images/products/adidas_shoe-1.png",
-  "brandId": {
-    "$oid": "64b8b53305108d56e65d9703"
-  },
-  "typeId": {
-    "$oid": "64b8b2b805108d56e65d9701"
-  },
-  "_class": "io.ngshop.catalog.model.Product"
+"_id": {
+"$oid": "64b8daf19e035c153ae2ee34"
+},
+"name": "d-Jiguli",
+"description": "provides lightweight cushioning. The shoes can be used for Badminton and Squash",
+"price": 900,
+"summary": "Indoor Badminton Shoes",
+"imageFile": "images/products/adidas_shoe-1.png",
+"brandId": {
+"$oid": "64b8b53305108d56e65d9703"
+},
+"typeId": {
+"$oid": "64b8b2b805108d56e65d9701"
+},
+"_class": "io.ngshop.catalog.model.Product"
 }]

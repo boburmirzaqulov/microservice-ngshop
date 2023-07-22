@@ -2,8 +2,9 @@ package io.ngshop.catalog.controller;
 
 
 import io.ngshop.catalog.dto.BrandDTO;
-import io.ngshop.catalog.dto.ProductDTO;
+
 import io.ngshop.catalog.dto.TypeDTO;
+import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.dto.response.ProductResponse;
 import io.ngshop.catalog.service.BrandService;
 import io.ngshop.catalog.service.ProductService;
