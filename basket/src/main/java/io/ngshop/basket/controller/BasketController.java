@@ -1,7 +1,5 @@
 package io.ngshop.basket.controller;
 import io.ngshop.basket.dto.BasketDTO;
-import io.ngshop.basket.dto.BasketV2DTO;
-import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +22,9 @@ public class BasketController {
     }
 
     @PostMapping("/CheckoutV2")
-    public ResponseEntity<Basket> checkoutBasket(@RequestBody BasketV2DTO basketV2DTO) {
+    public ResponseEntity<BasketDTO> checkoutBasket(@RequestBody BasketDTO basketDto) {
         // Do checkout process
-        return basketService.checkoutBasket(basketV2DTO);
+        return basketService.checkoutBasket(basketDto);
     }
 
 

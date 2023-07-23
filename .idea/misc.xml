@@ -10,6 +10,7 @@
     <file type="web" url="file://$PROJECT_DIR$/eureka-server" />
     <file type="web" url="file://$PROJECT_DIR$/ordering" />
     <file type="web" url="file://$PROJECT_DIR$/spring-cloud-api-gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/user-service" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
