@@ -43,8 +43,6 @@ public class OrderServiceImpl implements OrderService {
             throw new NotFoundException("order not found");
         }
         Order byUsername = orderRepository.findByUsername(order.getUsername());
-//        byUsername.setId(order.getId());
-        byUsername.setUsername(order.getUsername());
         byUsername.setTotalPrice(order.getTotalPrice());
         byUsername.setFirstname(order.getFirstname());
         byUsername.setLastname(order.getLastname());
@@ -57,17 +55,13 @@ public class OrderServiceImpl implements OrderService {
         byUsername.setCardNumber(order.getCardNumber());
         byUsername.setExpiration(order.getExpiration());
         byUsername.setCvv(order.getCvv());
-        byUsername.setPaymentMethod(order.getPaymentMethod());
+        byUsername.setProducts(order.getProducts());
         return ResponseEntity.ok(orderMapper.toDTO(byUsername));
     }
 
     @Override
     public ResponseEntity<Void> deleteOrder(Long id) {
-        try {
-            orderRepository.deleteById(id);
-        } catch (NotFoundException ex){
-            ex.getMessage();
-        }
-        return ResponseEntity.ok().build();
+        orderRepository.deleteById(id);
+        return (ResponseEntity<Void>) ResponseEntity.ok();
     }
 }
