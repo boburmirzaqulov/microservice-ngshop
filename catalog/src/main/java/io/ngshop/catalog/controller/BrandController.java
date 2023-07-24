@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin(origins = "*")
 public class BrandController {
     private final BrandService brandService;
 

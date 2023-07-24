@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin(origins = "*")
 public class TypeController {
     private final TypeService typeService;
 

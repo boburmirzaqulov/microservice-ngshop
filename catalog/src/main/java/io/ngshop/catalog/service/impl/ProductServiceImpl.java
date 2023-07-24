@@ -8,7 +8,6 @@ import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.repository.ProductRepository;
 import io.ngshop.catalog.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
