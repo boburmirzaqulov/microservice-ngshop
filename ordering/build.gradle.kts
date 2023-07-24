@@ -18,8 +18,12 @@ configurations {
     }
 }
 
+
 repositories {
     mavenCentral()
+}
+repositories{
+    mavenLocal()
 }
 
 extra["springCloudVersion"] = "2022.0.3"
@@ -31,6 +35,8 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation ("org.springframework.boot:spring-boot-starter-amqp")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.hibernate.validator:hibernate-validator-annotation-processor:8.0.0.Final")
     runtimeOnly("com.oracle.database.jdbc:ojdbc8")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     compileOnly("org.projectlombok:lombok")
