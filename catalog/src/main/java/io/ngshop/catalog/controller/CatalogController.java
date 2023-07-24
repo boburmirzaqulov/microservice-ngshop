@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/Catalog")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 public class CatalogController {
     private final ProductService productService;
     private final TypeService typeService;

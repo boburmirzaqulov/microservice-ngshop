@@ -1,5 +1,4 @@
 package io.ngshop.basket.controller;
-import io.ngshop.basket.dto.BasketCheckout;
 import io.ngshop.basket.dto.response.BasketResponse;
 import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.service.BasketService;

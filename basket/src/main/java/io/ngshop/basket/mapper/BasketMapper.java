@@ -1,7 +1,6 @@
 package io.ngshop.basket.mapper;
 
 import io.ngshop.basket.clients.UserClient;
-import io.ngshop.basket.dto.BasketCheckout;
 import io.ngshop.basket.dto.UserDTO;
 import io.ngshop.basket.dto.response.BasketResponse;
 import io.ngshop.basket.model.Basket;
@@ -30,25 +29,8 @@ public class BasketMapper {
         );
     }
 
-    public BasketCheckout toCheckout(BasketResponse basketResponse){
-        UserDTO userDTO = userClient.getUser(basketResponse.getUserName());
-        return new BasketCheckout(
-                userDTO.getUsername(),
-                basketResponse.getTotalPrice(),
-                userDTO.getFirstName(),
-                userDTO.getLastName(),
-                userDTO.getEmail(),
-                userDTO.getAddress(),
-                userDTO.getCountry(),
-                userDTO.getState(),
-                userDTO.getZipCode(),
-                userDTO.getCardName(),
-                userDTO.getCardNumber(),
-                userDTO.getExpiration(),
-                userDTO.getCvv(),
-                basketResponse.getItems()
-        );
-    }
+
+
 
 
 
