@@ -13,7 +13,8 @@ public class DiscountController {
     private final CouponService couponService;
     @GetMapping("/{productName}")
     public ResponseEntity<CouponDto> getDiscountByProduct(@PathVariable String productName){
-        return couponService.getCouponByProductName(productName);
+        return ResponseEntity.ok(new CouponDto(1L, productName, "some desc", 100.1));
+//        return couponService.getCouponByProductName(productName);
     }
     @PostMapping()
     public ResponseEntity<CouponDto> createCoupon(@RequestBody CouponDto couponDto){

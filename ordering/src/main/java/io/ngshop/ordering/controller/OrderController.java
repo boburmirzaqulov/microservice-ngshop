@@ -18,11 +18,6 @@ public class OrderController {
         return orderService.getOrderByUsername(username);
     }
 
-    @PostMapping
-    public ResponseEntity<OrderDTO> addOrder(@RequestBody OrderDTO orderDTO){
-        return orderService.addOrder(orderDTO);
-    }
-
     @PutMapping("/Order")
 
     public ResponseEntity<OrderDTO> updateOrder(@RequestBody OrderDTO orderDTO){

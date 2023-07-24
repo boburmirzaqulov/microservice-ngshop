@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDTO {
+public class OrderDTO implements Serializable {
     private Long id;
-    private String userName;
+    private String username;
     private Double totalPrice;
     private String firstName;
     private String lastName;
@@ -22,6 +25,6 @@ public class OrderDTO {
     private String cardNumber;
     private String expiration;
     private String cvv;
-    private Integer paymentMethod;
+    private List<ProductDTO> items;
 
 }

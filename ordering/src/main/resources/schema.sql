@@ -12,5 +12,14 @@ create table orders(
                        card_name varchar2(32),
                        card_number varchar2(32),
                        expiration varchar2(6),
-                       cvv varchar2(12),
-                       payment_method integer not null);
+                       cvv varchar2(12));
+
+create table products(
+    id varchar2(50) not null primary key,
+    quantity INTEGER,
+    imageFile varchar2(256),
+    price NUMBER,
+    productName VARCHAR(256),
+    order_id NUMBER,
+    foreign key (order_id) references orders(id)
+)
