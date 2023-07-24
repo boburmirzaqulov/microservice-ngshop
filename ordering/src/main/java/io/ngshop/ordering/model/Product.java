@@ -19,7 +19,4 @@ public class Product {
     private String imageFile;
     private Double price;
     private String productName;
-    @ManyToOne
-    @JoinColumn(name="order_id")
-    private Order order;
 }

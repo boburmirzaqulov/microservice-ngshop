@@ -40,12 +40,6 @@ public class OrderServiceImpl implements OrderService {
         }
         order.setId(null);
         Order save = orderRepository.save(order);
-        List<Product> saveProduct = save.getProducts()
-                .stream()
-                .peek(p -> p.getOrder().setId(save.getId()))
-                .collect(Collectors.toList());
-        productRepository.saveAll(saveProduct);
-        save.setProducts(saveProduct);
         return ResponseEntity.ok(orderMapper.toDTO(save));
     }
 

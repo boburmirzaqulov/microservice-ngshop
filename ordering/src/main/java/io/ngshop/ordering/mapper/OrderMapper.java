@@ -50,7 +50,6 @@ public class OrderMapper {
                 orderDTO.getCvv(),
                 orderDTO.getItems().stream()
                         .map(productMapper::toEntity)
-                        .peek(p -> p.setOrder(Order.builder().id(orderDTO.getId()).build()))
                         .collect(Collectors.toList())
 
         );

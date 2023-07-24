@@ -14,17 +14,16 @@ public class ProductMapper {
                 productDTO.getQuantity(),
                 productDTO.getImageFile(),
                 productDTO.getPrice(),
-                productDTO.getProductName(),
-                null
+                productDTO.getProductName()
         );
     }
 
     public ProductDTO toDto(Product product){
         return product == null ? null : new ProductDTO(
+                product.getId(),
                 product.getQuantity(),
                 product.getImageFile(),
                 product.getPrice(),
-                product.getId(),
                 product.getProductName()
         );
     }
