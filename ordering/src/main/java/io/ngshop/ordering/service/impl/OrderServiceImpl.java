@@ -42,8 +42,6 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("order not found");
         }
         Order byUsername = orderRepository.findByUsername(order.getUsername());
-//        byUsername.setId(order.getId());
-        byUsername.setUsername(order.getUsername());
         byUsername.setTotalPrice(order.getTotalPrice());
         byUsername.setFirstname(order.getFirstname());
         byUsername.setLastname(order.getLastname());
