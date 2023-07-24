@@ -19,7 +19,7 @@ create table products(
     quantity INTEGER,
     imageFile varchar2(256),
     price NUMBER,
-    productName VARCHAR(256),
+    product_name VARCHAR(256),
     order_id NUMBER,
     foreign key (order_id) references orders(id)
 )
