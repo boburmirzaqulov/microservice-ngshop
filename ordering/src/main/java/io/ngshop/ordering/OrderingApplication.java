@@ -42,10 +42,10 @@ public class OrderingApplication implements CommandLineRunner {
 				"12/25",
 				"123",
 				List.of(new ProductDTO(
+						"GJAHGGHJK24521",
 						2,
 						"https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=1024x1024&w=is&k=20&c=d1zu5oXbrdTrk2AtTyUtvnWLF7ZeIbTgqSXabU4ABi4=",
 						213.2,
-						"GJAHGGHJK24521",
 						"Olma"
 				))
 		));

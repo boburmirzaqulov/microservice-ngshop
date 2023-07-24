@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,10 +25,9 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final ProductRepository productRepository;
     public ResponseEntity<OrderDTO> getOrderByUsername(String username) {
-        Order order = orderRepository.findByUsername(username);
-        if(order == null){
-            throw new NotFoundException("order not found");
-        }
+        Order order = orderRepository.findByUsername(username).orElseThrow(
+                () -> new NotFoundException("order not found"));
+
         return ResponseEntity.ok(orderMapper.toDTO(order));
     }
 
@@ -39,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
             throw new NotFoundException("order not found");
         }
         order.setId(null);
+        productRepository.saveAll(order.getProducts());
         Order save = orderRepository.save(order);
         return ResponseEntity.ok(orderMapper.toDTO(save));
     }
@@ -49,11 +50,15 @@ public class OrderServiceImpl implements OrderService {
         if (order == null){
             throw new NotFoundException("order not found");
         }
-        Order byUsername = orderRepository.findByUsername(order.getUsername());
+        Order byUsername = orderRepository.findByUsername(order.getUsername()).orElseThrow(
+                () -> new NotFoundException("order not found")
+        );
+
         byUsername.setTotalPrice(order.getTotalPrice());
         byUsername.setFirstname(order.getFirstname());
         byUsername.setLastname(order.getLastname());
         byUsername.setEmailAddress(order.getEmailAddress());
+
         byUsername.setAddressLine(order.getAddressLine());
         byUsername.setCountry(order.getCountry());
         byUsername.setState(order.getState());
@@ -62,13 +67,16 @@ public class OrderServiceImpl implements OrderService {
         byUsername.setCardNumber(order.getCardNumber());
         byUsername.setExpiration(order.getExpiration());
         byUsername.setCvv(order.getCvv());
-        byUsername.setProducts(order.getProducts().stream().map(productRepository::save).collect(Collectors.toList()));
+        byUsername.setProducts(productRepository.saveAll(order.getProducts()));
         return ResponseEntity.ok(orderMapper.toDTO(byUsername));
     }
 
     @Override
     public ResponseEntity<Void> deleteOrder(Long id) {
-        orderRepository.deleteById(id);
+        Order order = orderRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("order not found")
+        );
+        orderRepository.delete(order);
         return (ResponseEntity<Void>) ResponseEntity.ok();
     }
 }
