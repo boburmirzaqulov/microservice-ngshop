@@ -6,10 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basket.main.iml" filepath="$PROJECT_DIR$/.idea/modules/basket.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog.main.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.catalog.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.catalog.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.discount.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.discount.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/discount.main.iml" filepath="$PROJECT_DIR$/.idea/modules/discount.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/najot ngshop.iml" filepath="$PROJECT_DIR$/.idea/najot ngshop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ordering.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ordering.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-cloud-api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-cloud-api-gateway.main.iml" />
     </modules>
   </component>
