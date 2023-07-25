@@ -2,6 +2,7 @@ package io.ngshop.basket.service.impl;
 
 import io.ngshop.basket.clients.DiscountClient;
 import io.ngshop.basket.customexception.NoResourceFoundException;
+import io.ngshop.basket.dto.BasketCheckout;
 import io.ngshop.basket.dto.BasketV2DTO;
 import io.ngshop.basket.dto.DiscountDTO;
 import io.ngshop.basket.dto.ProductDTO;
@@ -11,6 +12,7 @@ import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.repository.BasketRepository;
 import io.ngshop.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +27,18 @@ public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final BasketMapper basketMapper;
     private final DiscountClient discountClient;
+    private final RabbitMQSender rabbitMQSender;
+
 
     @Override
     public ResponseEntity<BasketResponse> getBasketByUsername(String username) {
-        Basket basket = basketRepository.findByUsername(username)
-                .orElseThrow(() -> new NoResourceFoundException(" BASKET NOT FOUND "));
-        BasketResponse basketResponse = basketMapper.toDto(basket);
+        Optional<Basket> basket = basketRepository.findByUsername(username);
+        if (basket.isPresent()) {
+            BasketResponse basketResponse = basketMapper.toDto(basket.get());
+            return ResponseEntity.ok(basketResponse);
+        }
 
-        return ResponseEntity.ok(basketResponse);
+        return ResponseEntity.ok().build();
     }
 
     @Override
@@ -68,16 +74,17 @@ public class BasketServiceImpl implements BasketService {
         String username = basketResponse.getUserName();
 
         if (username != null) {
-
-
+            finalBasket.setUsername(username);
         }
         Basket save = basketRepository.save(finalBasket);
         return ResponseEntity.ok(basketMapper.toDto(save));
     }
 
     @Override
-    public ResponseEntity<Basket> checkoutBasket(BasketV2DTO basketV2DTO) {
-        return null;
+    public ResponseEntity<BasketResponse> checkoutBasket(BasketResponse basketResponse) {
+        BasketCheckout basketCheckout = basketMapper.toCheckout(basketResponse);
+        rabbitMQSender.send(basketCheckout);
+        return ResponseEntity.ok(basketResponse);
     }
 
     @Override

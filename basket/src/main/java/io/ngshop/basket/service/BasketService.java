@@ -12,7 +12,7 @@ public interface BasketService {
 
     ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse);
 
-    ResponseEntity<Basket> checkoutBasket(BasketV2DTO basketV2DTO);
+    ResponseEntity<BasketResponse> checkoutBasket(BasketResponse basketResponse);
 
     ResponseEntity<Void> deleteBasket(String username);
 }

@@ -37,17 +37,26 @@ public class ProductExtensionImpl implements ProductExtension {
         typeId.ifPresent(value -> query.addCriteria(Criteria.where("typeId").is(CommonService.checkObjectId(value))));
         search.ifPresent(value -> query.addCriteria(Criteria.where("name").regex(value.toLowerCase())));
         int size = mongoTemplate.find(query, Product.class).size();
+
+        int index = 1;
+        int pSize = 10;
         if (pageIndex.isPresent() && pageSize.isPresent()){
             if (!(pageIndex.get().equals("null") || pageSize.get().equals("null"))) {
-                query.with(PageRequest.of(Integer.parseInt(pageIndex.get())-1, Integer.parseInt(pageSize.get())));
+                index = Integer.parseInt(pageIndex.get())-1;
+                pSize = Integer.parseInt(pageSize.get());
+                query.with(PageRequest.of(index, pSize));
             }
+        } else {
+            query.with(PageRequest.of(0, pSize));
         }
+
         sort.ifPresent(s -> {
             if (Set.of("name","id","price","description","summary","bradId","typeId").contains(s)) query.with(Sort.by(s));
         });
 
+
         List<ProductDTO> list = mongoTemplate.find(query, Product.class).stream().map(productMapper::toDto).toList();
-        return ProductResponse.builder().data(list).pageIndex(Integer.valueOf(pageIndex.get())).pageSize(Integer.valueOf(pageSize.get())).count(size).build();
+        return ProductResponse.builder().data(list).pageIndex(index).pageSize(pSize).count(size).build();
 
     }
 

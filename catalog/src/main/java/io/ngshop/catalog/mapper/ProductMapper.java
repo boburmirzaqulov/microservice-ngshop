@@ -1,7 +1,6 @@
 package io.ngshop.catalog.mapper;
 
 import io.ngshop.catalog.dto.ProductDTO;
-import io.ngshop.catalog.exception.NotFoundException;
 import io.ngshop.catalog.model.Brand;
 import io.ngshop.catalog.model.Product;
 import io.ngshop.catalog.model.Type;
@@ -9,7 +8,6 @@ import io.ngshop.catalog.repository.BrandRepository;
 import io.ngshop.catalog.repository.TypeRepository;
 import io.ngshop.catalog.service.impl.CommonService;
 import lombok.RequiredArgsConstructor;
-
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +41,6 @@ public class ProductMapper {
     public Product toEntity(ProductDTO productDto) {
         return productDto == null ? null : new Product(
                 null,
-
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),

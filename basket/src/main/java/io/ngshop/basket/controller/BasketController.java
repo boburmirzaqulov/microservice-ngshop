@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("Basket")
+@CrossOrigin(value = "*")
 public class BasketController {
 
     @Autowired
@@ -32,9 +33,8 @@ public class BasketController {
     }
 
     @PostMapping("/CheckoutV2")
-    public ResponseEntity<Basket> checkoutBasket(@RequestBody BasketV2DTO basketV2DTO) {
-        // Do checkout process
-        return basketService.checkoutBasket(basketV2DTO);
+    public ResponseEntity<BasketResponse> checkoutBasket(@RequestBody BasketResponse basketResponse) {
+        return basketService.checkoutBasket(basketResponse);
     }
 
 
