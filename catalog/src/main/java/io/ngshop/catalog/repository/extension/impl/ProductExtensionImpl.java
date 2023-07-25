@@ -31,6 +31,7 @@ public class ProductExtensionImpl implements ProductExtension {
     private final BrandRepository brandRepository;
     private final ProductMapper productMapper;
 
+
     @Override
     public ResponseEntity<ProductResponse> findAllWithPagination(Integer pageIndex, Integer pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search) {
         Query query = new Query();

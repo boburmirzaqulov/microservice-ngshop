@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface ProductExtension {
     ResponseEntity<ProductResponse> findAllWithPagination(Integer pageIndex, Integer pageSize, Optional<String> brandId, Optional<String> typeId, Optional<String> sort, Optional<String> search);
     List<Product> findByBrandName(String brand);
+
 }
