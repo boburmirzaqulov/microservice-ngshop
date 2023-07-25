@@ -1,6 +1,7 @@
 package io.ngshop.basket.controller;
-
+import io.ngshop.basket.dto.BasketV2DTO;
 import io.ngshop.basket.dto.response.BasketResponse;
+import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("Basket")
+@CrossOrigin(value = "*")
 public class BasketController {
 
     @Autowired
@@ -31,9 +33,8 @@ public class BasketController {
     }
 
     @PostMapping("/CheckoutV2")
-    public ResponseEntity<BasketResponse> checkoutBasket(@RequestBody BasketResponse basketV2DTO) {
-        // Do checkout process
-        return basketService.checkoutBasket(basketV2DTO);
+    public ResponseEntity<BasketResponse> checkoutBasket(@RequestBody BasketResponse basketResponse) {
+        return basketService.checkoutBasket(basketResponse);
     }
 
 

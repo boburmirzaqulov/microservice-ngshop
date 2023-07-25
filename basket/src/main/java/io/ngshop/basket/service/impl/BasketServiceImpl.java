@@ -1,6 +1,5 @@
 package io.ngshop.basket.service.impl;
 
-import feign.FeignException;
 import io.ngshop.basket.clients.DiscountClient;
 import io.ngshop.basket.clients.UserClient;
 import io.ngshop.basket.config.RabbitMQConfig;
@@ -35,7 +34,7 @@ public class BasketServiceImpl implements BasketService {
                 .orElseThrow(() -> new NoResourceFoundException("BASKET NOT FOUND"));
         BasketResponse basketResponse = basketMapper.toDtoRes(basket);
 
-        return ResponseEntity.ok(basketResponse);
+        return ResponseEntity.ok().build();
     }
 
     @Override

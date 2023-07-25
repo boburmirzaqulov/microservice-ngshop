@@ -1,7 +1,5 @@
 package io.ngshop.basket.mapper;
 
-import io.ngshop.basket.dto.BasketDTO;
-import io.ngshop.basket.dto.ProductDTO;
 import io.ngshop.basket.dto.response.BasketResponse;
 import io.ngshop.basket.model.Basket;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +11,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class BasketMapper {
+    private final UserClient userClient;
+
 
     public Basket toEntity(BasketDTO basketDTO){
         if(basketDTO == null) return null;
@@ -43,5 +43,25 @@ public class BasketMapper {
     }
 
 
+    public BasketCheckout toCheckout(BasketResponse basketResponse){
+//        UserDTO userDTO = userClient.getUser(basketResponse.getUserName());
+        UserDTO userDTO = new UserDTO();
+        return new BasketCheckout(
+                userDTO.getUsername(),
+                basketResponse.getTotalPrice(),
+                userDTO.getFirstName(),
+                userDTO.getLastName(),
+                userDTO.getEmail(),
+                userDTO.getAddress(),
+                userDTO.getCountry(),
+                userDTO.getState(),
+                userDTO.getZipCode(),
+                userDTO.getCardName(),
+                userDTO.getCardNumber(),
+                userDTO.getExpiration(),
+                userDTO.getCvv(),
+                basketResponse.getItems()
+        );
+    }
 
 }
