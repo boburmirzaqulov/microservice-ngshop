@@ -20,14 +20,12 @@ public class ProductDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ProductDTO that = (ProductDTO) o;
-
         return Objects.equals(productId, that.productId);
     }
 
     @Override
     public int hashCode() {
-        return productId != null ? productId.hashCode() : 0;
+        return Objects.hash(productId);
     }
 }

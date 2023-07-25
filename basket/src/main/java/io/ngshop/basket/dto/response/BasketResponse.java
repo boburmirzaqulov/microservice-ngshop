@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,8 @@ import java.util.Set;
 @Data
 @Builder
 public class BasketResponse {
+    private ObjectId objectId;
     private String userName;
-    private Set<ProductDTO> Items;
+    private List<ProductDTO> Items;
     private Double totalPrice;
 }

@@ -24,7 +24,7 @@ public class Basket {
    @Id
    private ObjectId objectId;
    private String username;
-   private Set<ProductDTO> items;
+   private List<ProductDTO> items;
    private Double totalPrice;
 
 }

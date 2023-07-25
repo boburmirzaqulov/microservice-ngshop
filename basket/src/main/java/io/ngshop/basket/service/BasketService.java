@@ -1,7 +1,6 @@
 package io.ngshop.basket.service;
 
 import feign.FeignException;
-import io.ngshop.basket.dto.BasketCheckout;
 import io.ngshop.basket.dto.response.BasketResponse;
 import io.ngshop.basket.model.Basket;
 import org.springframework.http.ResponseEntity;

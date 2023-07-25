@@ -1,6 +1,5 @@
 package io.ngshop.basket.controller;
 import io.ngshop.basket.dto.response.BasketResponse;
-import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -15,7 +15,7 @@ public class BasketMapper {
 
     public Basket toEntity(BasketResponse basketResponse){
         return new Basket(
-                null,
+                basketResponse.getObjectId(),
                 basketResponse.getUserName(),
                 basketResponse.getItems(),
                 basketResponse.getTotalPrice()
@@ -23,6 +23,7 @@ public class BasketMapper {
     }
     public BasketResponse toDto(Basket basket){
         return new BasketResponse(
+                basket.getObjectId(),
                 basket.getUsername(),
                 basket.getItems(),
                 basket.getTotalPrice()

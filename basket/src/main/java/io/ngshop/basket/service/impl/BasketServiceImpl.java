@@ -1,8 +1,10 @@
 package io.ngshop.basket.service.impl;
 
+import feign.FeignException;
 import io.ngshop.basket.clients.DiscountClient;
 import io.ngshop.basket.clients.UserClient;
 import io.ngshop.basket.config.Config;
+import io.ngshop.basket.customexception.FeignClientException;
 import io.ngshop.basket.customexception.NoResourceFoundException;
 import io.ngshop.basket.dto.DiscountDTO;
 import io.ngshop.basket.dto.ProductDTO;
@@ -18,6 +20,8 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,33 +45,29 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) {
-        Basket finalBasket;
-        Optional<Basket> existingBasket = basketRepository.findByUsername(basketResponse.getUserName());
-        if (existingBasket.isPresent()) {
-            Set<ProductDTO> existingItems = existingBasket.get().getItems();
-            for (ProductDTO productDTO : basketResponse.getItems()) {
-                if (!existingItems.contains(productDTO)) {
-                    String productName = productDTO.getProductName();
-                    DiscountDTO discountDTO = discountClient.getDiscount(productName);
-                    Double amount = discountDTO.getAmount();
-                    productDTO.setPrice(productDTO.getPrice() - amount);
-                } else {
-                    existingItems.remove(productDTO);
-                }
-            }
-            existingBasket.get().getItems().addAll(basketResponse.getItems());
-            finalBasket = existingBasket.get();
-        } else {
-            for (ProductDTO productDTO : basketResponse.getItems()) {
-                String productName = productDTO.getProductName();
-                DiscountDTO discountDTO = discountClient.getDiscount(productName);
-                Double amount = discountDTO.getAmount();
-                productDTO.setPrice(productDTO.getPrice() - amount);
-            }
-            finalBasket = basketMapper.toEntity(basketResponse);
-        }
+        try{
+            List<ProductDTO> existProducts = new ArrayList<>();
+            basketRepository.findByUsername(basketResponse.getUserName())
+                    .ifPresent(basket -> {
+                        basketResponse.setObjectId(basket.getObjectId());
+                        existProducts.addAll(basket.getItems());
+                    });
 
-        Basket save = basketRepository.save(finalBasket);
+            basketResponse.getItems().forEach(productDTO -> {
+                if(!existProducts.contains(productDTO)) {
+                    DiscountDTO discount = discountClient.getDiscount(productDTO.getProductName());
+                    productDTO.setPrice(productDTO.getPrice() - discount.getAmount());
+                }
+            });
+        }catch(FeignException ex){
+            if(ex.status()!= 400) throw new FeignClientException(ex.getMessage());
+        }
+        basketResponse.setTotalPrice(
+                basketResponse.getItems().stream()
+                        .mapToDouble(value -> value.getPrice()* value.getQuantity())
+                        .sum()
+        );
+        Basket save = basketRepository.save(basketMapper.toEntity(basketResponse));
         return ResponseEntity.ok(basketMapper.toDto(save));
     }
 

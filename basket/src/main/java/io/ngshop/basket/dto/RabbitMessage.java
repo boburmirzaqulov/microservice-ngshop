@@ -25,5 +25,5 @@ public class RabbitMessage implements Serializable {
     private String cardNumber;
     private String expiration;
     private String cvv;
-    private Set<ProductDTO> items;
+    private List<ProductDTO> items;
 }

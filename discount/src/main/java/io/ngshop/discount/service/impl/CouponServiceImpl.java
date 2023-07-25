@@ -20,7 +20,6 @@ public class CouponServiceImpl implements CouponService {
 
         Coupon discount = couponRepository.findByProductName(productName)
                 .orElseThrow(() -> new NoResourceFoundException("discount not found"));
-
         return ResponseEntity.ok(couponMapper.toDto(discount));
     }
 
