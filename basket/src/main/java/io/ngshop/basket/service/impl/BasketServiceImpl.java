@@ -2,16 +2,18 @@ package io.ngshop.basket.service.impl;
 
 import feign.FeignException;
 import io.ngshop.basket.clients.DiscountClient;
+import io.ngshop.basket.clients.UserClient;
+import io.ngshop.basket.config.RabbitMQConfig;
+import io.ngshop.basket.customexception.FeinClientException;
 import io.ngshop.basket.customexception.NoResourceFoundException;
-import io.ngshop.basket.dto.BasketDTO;
-import io.ngshop.basket.dto.DiscountDTO;
-import io.ngshop.basket.dto.ProductDTO;
+import io.ngshop.basket.dto.*;
 import io.ngshop.basket.dto.response.BasketResponse;
 import io.ngshop.basket.mapper.BasketMapper;
 import io.ngshop.basket.model.Basket;
 import io.ngshop.basket.repository.BasketRepository;
 import io.ngshop.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final BasketMapper basketMapper;
     private final DiscountClient discountClient;
+    private final UserClient userClient;
+    private final AmqpTemplate amqpTemplate;
 
     @Override
     public ResponseEntity<BasketResponse> getBasketByUsername(String username) {
@@ -36,13 +40,13 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) {
+        BasketDTO basketDTO = new BasketDTO(
+                null,
+                basketResponse.getUserName(),
+                new ArrayList<>(basketResponse.getItems()),
+                basketResponse.getTotalPrice()
+        );
         try{
-            BasketDTO basketDTO = new BasketDTO(
-                    null,
-                    basketResponse.getUserName(),
-                    new ArrayList<>(basketResponse.getItems()),
-                    basketResponse.getTotalPrice()
-            );
             List<ProductDTO> existProducts = new ArrayList<>();
             basketRepository.findByUserName(basketDTO.getUserName())
                             .ifPresent(basket -> {
@@ -65,11 +69,11 @@ public class BasketServiceImpl implements BasketService {
                         .sum()
         );
         Basket save = basketRepository.save(basketMapper.toEntity(basketDTO));
-        return ResponseEntity.ok(basketMapper.toDto(save));
+        return ResponseEntity.ok(basketMapper.toDtoRes(save));
     }
 
     @Override
-    public ResponseEntity<BasketDTO> checkoutBasket(BasketDTO basketDTO){
+    public ResponseEntity<BasketResponse> checkoutBasket(BasketResponse basketDTO){
         UserDto user = userClient.getUserByUsername(basketDTO.getUserName());
         RabbitMessage message = new RabbitMessage(
                 user.getUsername(),
@@ -85,7 +89,7 @@ public class BasketServiceImpl implements BasketService {
                 user.getCardNumber(),
                 user.getExpiration(),
                 user.getCvv(),
-                basketDTO.getItems()
+                new ArrayList<>(basketDTO.getItems())
         );
         amqpTemplate.convertAndSend(RabbitMQConfig.exchange,RabbitMQConfig.routingKey,message);
         return ResponseEntity.ok(basketDTO);
@@ -93,9 +97,9 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public ResponseEntity<Void> deleteBasket(String username) {
-        Basket basket = basketRepository.findByUsername(username)
+        Basket basket = basketRepository.findByUserName(username)
                 .orElseThrow(() -> new NoResourceFoundException("Basket not found"));
-        basketRepository.deleteById(basket.getObjectId());
+        basketRepository.deleteById(basket.getId());
         return ResponseEntity.ok().build();
     }
 }
