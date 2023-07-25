@@ -1,8 +1,9 @@
 package io.ngshop.basket.service.impl;
 
+import feign.FeignException;
 import io.ngshop.basket.clients.DiscountClient;
 import io.ngshop.basket.customexception.NoResourceFoundException;
-import io.ngshop.basket.dto.BasketV2DTO;
+import io.ngshop.basket.dto.BasketDTO;
 import io.ngshop.basket.dto.DiscountDTO;
 import io.ngshop.basket.dto.ProductDTO;
 import io.ngshop.basket.dto.response.BasketResponse;
@@ -14,70 +15,79 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final BasketMapper basketMapper;
-    private final DiscountClient discountClient;
 
     @Override
     public ResponseEntity<BasketResponse> getBasketByUsername(String username) {
-        Basket basket = basketRepository.findByUsername(username)
-                .orElseThrow(() -> new NoResourceFoundException(" BASKET NOT FOUND "));
-        BasketResponse basketResponse = basketMapper.toDto(basket);
+        Basket basket = basketRepository.findByUserName(username)
+                .orElseThrow(() -> new NoResourceFoundException("BASKET NOT FOUND"));
+        BasketResponse basketResponse = basketMapper.toDtoRes(basket);
 
         return ResponseEntity.ok(basketResponse);
     }
 
     @Override
     public ResponseEntity<BasketResponse> createBasket(BasketResponse basketResponse) {
-        Basket finalBasket;
-        Optional<Basket> existingBasket = basketRepository.findByUsername(basketResponse.getUserName());
-        if (existingBasket.isPresent()) {
-            Set<ProductDTO> existingItems = existingBasket.get().getItems();
-            for (ProductDTO productDTO : basketResponse.getItems()) {
-                if (!existingItems.contains(productDTO)) {
-                    String productName = productDTO.getProductName();
-                    DiscountDTO discountDTO = discountClient.getDiscount(productName);
-                    Double amount = discountDTO.getAmount();
-                    productDTO.setPrice(productDTO.getPrice() - amount);
-                } else {
-                    existingItems.remove(productDTO);
+        try{
+            BasketDTO basketDTO = new BasketDTO(
+                    null,
+                    basketResponse.getUserName(),
+                    new ArrayList<>(basketResponse.getItems()),
+                    basketResponse.getTotalPrice()
+            );
+            List<ProductDTO> existProducts = new ArrayList<>();
+            basketRepository.findByUserName(basketDTO.getUserName())
+                            .ifPresent(basket -> {
+                                basketDTO.setId(basket.getId());
+                                existProducts.addAll(basket.getItems());
+                            });
+
+            basketDTO.getItems().forEach(productDTO -> {
+                if(!existProducts.contains(productDTO)) {
+                    DiscountDTO discount = discountClient.getProductByName(productDTO.getProductName());
+                    productDTO.setPrice(productDTO.getPrice() - discount.getAmount());
                 }
-            }
-            existingBasket.get().getItems().addAll(basketResponse.getItems());
-            finalBasket = existingBasket.get();
-        } else {
-            for (ProductDTO productDTO : basketResponse.getItems()) {
-                String productName = productDTO.getProductName();
-                DiscountDTO discountDTO = discountClient.getDiscount(productName);
-                Double amount = discountDTO.getAmount();
-                productDTO.setPrice(productDTO.getPrice() - amount);
-            }
-            finalBasket = basketMapper.toEntity(basketResponse);
+            });
+        }catch(FeignException ex){
+            if(ex.status()!= 400) throw new FeinClientException(ex.getMessage());
         }
-
-
-
-        String username = basketResponse.getUserName();
-
-        if (username != null) {
-
-
-        }
-        Basket save = basketRepository.save(finalBasket);
+        basketDTO.setTotalPrice(
+                basketDTO.getItems().stream()
+                        .mapToDouble(value -> value.getPrice()* value.getQuantity())
+                        .sum()
+        );
+        Basket save = basketRepository.save(basketMapper.toEntity(basketDTO));
         return ResponseEntity.ok(basketMapper.toDto(save));
     }
 
     @Override
-    public ResponseEntity<Basket> checkoutBasket(BasketV2DTO basketV2DTO) {
-        return null;
+    public ResponseEntity<BasketDTO> checkoutBasket(BasketDTO basketDTO){
+        UserDto user = userClient.getUserByUsername(basketDTO.getUserName());
+        RabbitMessage message = new RabbitMessage(
+                user.getUsername(),
+                basketDTO.getTotalPrice(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getAddress(),
+                user.getAddress(),
+                user.getCountry(),
+                user.getState(),
+                user.getZipCode(),
+                user.getCardName(),
+                user.getCardNumber(),
+                user.getExpiration(),
+                user.getCvv(),
+                basketDTO.getItems()
+        );
+        amqpTemplate.convertAndSend(RabbitMQConfig.exchange,RabbitMQConfig.routingKey,message);
+        return ResponseEntity.ok(basketDTO);
     }
 
     @Override
