@@ -1,4 +1,4 @@
-package io.ngshop.catalog.dto;
+package io.ngshop.basket.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,5 +13,5 @@ public class ProductResponse {
     private Integer pageIndex;
     private Integer pageSize;
     private Integer count;
-    private List<ProductDto> data;
+    private List<ProductDTO> data;
 }
