@@ -23,6 +23,7 @@ import java.util.List;
 public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final BasketMapper basketMapper;
+    private final DiscountClient discountClient;
 
     @Override
     public ResponseEntity<BasketResponse> getBasketByUsername(String username) {
