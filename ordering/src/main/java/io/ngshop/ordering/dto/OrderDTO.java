@@ -1,18 +1,25 @@
 package io.ngshop.ordering.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDTO {
+public class OrderDTO implements Serializable {
     private Long id;
-    private String userName;
+    @NotBlank(message = "Username is mandatory")
+    private String username;
     private Double totalPrice;
     private String firstName;
+    @NotBlank(message = "Last name is mandatory")
     private String lastName;
+    @NotBlank(message = "Email is mandatory")
     private String emailAddress;
     private String addressLine;
     private String country;
@@ -22,6 +29,7 @@ public class OrderDTO {
     private String cardNumber;
     private String expiration;
     private String cvv;
-    private Integer paymentMethod;
+    private List<ProductDTO> items;
+
 
 }
