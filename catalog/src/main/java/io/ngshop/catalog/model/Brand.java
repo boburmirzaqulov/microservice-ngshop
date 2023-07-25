@@ -22,4 +22,5 @@ public class Brand {
     private ObjectId id;
     @NotNull(message = "name must be null")
     private String name;
+
 }

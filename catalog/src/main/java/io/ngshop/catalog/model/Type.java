@@ -15,4 +15,5 @@ public class Type {
     @Id
     private ObjectId id;
     private String name;
+
 }
