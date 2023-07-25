@@ -5,9 +5,12 @@ import io.ngshop.ordering.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class OrderMapper {
+    private final ProductMapper productMapper;
     public OrderDTO toDTO(Order order){
         return order == null ? null : new OrderDTO(
                 order.getId(),
@@ -24,14 +27,15 @@ public class OrderMapper {
                 order.getCardNumber(),
                 order.getExpiration(),
                 order.getCvv(),
-                order.getPaymentMethod()
+                order.getProducts().stream().map(productMapper::toDto)
+                        .collect(Collectors.toList())
         );
     }
 
     public Order toEntity(OrderDTO orderDTO) {
         return orderDTO == null ? null : new Order(
                 orderDTO.getId(),
-                orderDTO.getUserName(),
+                orderDTO.getUsername(),
                 orderDTO.getTotalPrice(),
                 orderDTO.getFirstName(),
                 orderDTO.getLastName(),
@@ -44,7 +48,9 @@ public class OrderMapper {
                 orderDTO.getCardNumber(),
                 orderDTO.getExpiration(),
                 orderDTO.getCvv(),
-                orderDTO.getPaymentMethod()
+                orderDTO.getItems().stream()
+                        .map(productMapper::toEntity)
+                        .collect(Collectors.toList())
 
         );
     }

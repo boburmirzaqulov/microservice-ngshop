@@ -4,7 +4,6 @@ import io.ngshop.catalog.dto.ProductDTO;
 import io.ngshop.catalog.dto.response.ProductResponse;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
